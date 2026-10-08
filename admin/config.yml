@@ -1,0 +1,36 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "schedule"
+    label: "Афіша та Виступи"
+    files:
+      - file: "content/schedule.json"
+        label: "Список Концертів"
+        name: "events_list"
+        fields:
+          - label: "Виступи"
+            name: "events"
+            widget: "list"
+            fields:
+              - { label: "День (наприклад: 18)", name: "day", widget: "string" }
+              - { label: "Місяць та Рік (наприклад: Лист 2026)", name: "month", widget: "string" }
+              - { label: "Роль / Партія", name: "role", widget: "string" }
+              - { label: "Назва Опери", name: "opera", widget: "string" }
+              - { label: "Театр / Зал", name: "house", widget: "string" }
+              - { label: "Місто, Країна", name: "location", widget: "string" }
+
+  - name: "contacts"
+    label: "Контакти та Менеджмент"
+    files:
+      - file: "content/contacts.json"
+        label: "Прямі Контакти"
+        name: "contact_info"
+        fields:
+          - { label: "E-mail для зв'язку", name: "email", widget: "string" }
+          - { label: "Телефон / Telegram", name: "phone", widget: "string" }
+          - { label: "Локація (Місто, Країна)", name: "location", widget: "string" }
