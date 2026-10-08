@@ -45,40 +45,41 @@
     .swiper-button-next, .swiper-button-prev { color: #c5a059 !important; }
     .swiper-pagination-bullet-active { background: #c5a059 !important; }
 
-    /* --- НОВИЙ ЕФЕКТ М'ЯКОГО ЗБІЛЬШЕННЯ ПРИ НАВЕДЕННІ (Interactivity) --- */
+    /* --- ДЕЛІКАТНИЙ ЕФЕКТ ЗБІЛЬШЕННЯ КНОПОК ПРИ НАВЕДЕННІ --- */
     
-    /* 1. Визначаємо базову м'яку анімацію (перехід) для ВСІХ клікабельних елементів */
+    /* Базовий плавний перехід для всіх кнопок і посилань */
     a, button,
     .swiper-button-next, .swiper-button-prev,
     #schedule-container > div {
-      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform; /* Підказка браузеру для плавності */
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+      will-change: transform;
     }
 
-    /* Спеціальний фікс для посилань і кнопок, щоб transform працював коректно */
     a, button {
       display: inline-block;
     }
 
-    /* 2. Визначаємо ефект збільшення ПРИ НАВЕДЕННІ (Hover state) */
-    
-    /* Для стандартних посилань та кнопок: збільшуємо на 5% */
+    /* Мікро-збільшення буквально на 3% при наведенні мишкою */
     a:hover, button:hover,
     .swiper-button-next:hover, .swiper-button-prev:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
 
-    /* Спеціальний ефект для великих карток афіші: збільшення менше (3%), додавання тіні та зміна рамки */
+    /* Ефект легкого пружинистого натискання при кліку */
+    a:active, button:active,
+    .swiper-button-next:active, .swiper-button-prev:active {
+      transform: scale(0.98);
+    }
+
+    /* Картки афіші: ніжний підйом та тінь */
     #schedule-container > div {
-      cursor: pointer; /* Робимо всю картку клікабельною на вигляд */
+      cursor: pointer;
     }
     #schedule-container > div:hover {
-      transform: scale(1.03);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
       border-color: #c5a059 !important;
     }
-    
-    /* --- КІНЕЦЬ ЕФЕКТУ ВЗАЄМОДІЇ --- */
   </style>
 </head>
 <body class="antialiased">
@@ -102,7 +103,7 @@
       </nav>
 
       <!-- Admin Quick Button -->
-      <a href="/admin/" class="hidden sm:inline-block border border-neutral-800 text-neutral-900 px-4 py-2 text-xs font-semibold uppercase tracking-wider hover:bg-neutral-900 hover:text-white transition-all">
+      <a href="/admin/" class="hidden sm:inline-block border border-neutral-800 text-neutral-900 px-4 py-2 text-xs font-semibold uppercase tracking-wider hover:bg-neutral-900 hover:text-white transition-all shadow-sm">
         CMS Admin
       </a>
     </div>
@@ -120,7 +121,7 @@
           International Opera Soprano
         </p>
         <div class="pt-4 flex gap-4">
-          <a href="#schedule" class="bg-neutral-900 text-white px-8 py-3 text-xs tracking-widest uppercase hover:bg-brand-gold transition-all">
+          <a href="#schedule" class="bg-neutral-900 text-white px-8 py-3 text-xs tracking-widest uppercase hover:bg-brand-gold transition-all shadow-md">
             Performances
           </a>
           <a href="#contact" class="border border-neutral-300 text-neutral-800 px-8 py-3 text-xs tracking-widest uppercase hover:border-neutral-900 transition-all">
@@ -175,289 +176,4 @@
         <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Repertoire</h2>
       </div>
 
-      <div id="repertoire-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Dynamic Repertoire will load here -->
-        <div class="text-center text-neutral-400 col-span-full py-8">Loading repertoire...</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 5: Media (Listen & Watch) -->
-  <section id="media" class="py-24 max-w-5xl mx-auto px-6">
-    <div class="text-center max-w-xl mx-auto mb-16">
-      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Audio & Video</span>
-      <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Listen & Watch</h2>
-    </div>
-
-    <!-- Audio Tracks -->
-    <div class="mb-16">
-      <h3 class="text-xl font-serif mb-6 text-neutral-800 border-b pb-2">Audio Studio</h3>
-      <div id="audio-container" class="space-y-4">
-        <div class="text-neutral-400 text-sm">No audio recordings available yet.</div>
-      </div>
-    </div>
-
-    <!-- Video Embeds -->
-    <div>
-      <h3 class="text-xl font-serif mb-6 text-neutral-800 border-b pb-2">Featured Videos</h3>
-      <div id="video-container" class="grid md:grid-cols-2 gap-6">
-        <div class="text-neutral-400 text-sm col-span-full">No video recordings available yet.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 6: Gallery Carousel -->
-  <section id="gallery" class="py-24 bg-brand-card border-y border-neutral-200/60">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center max-w-xl mx-auto mb-12">
-        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Portraits & Stage</span>
-        <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Photo Gallery</h2>
-      </div>
-
-      <!-- Swiper Slider Container -->
-      <div class="swiper gallery-slider max-w-4xl mx-auto rounded-sm overflow-hidden shadow-xl bg-neutral-900">
-        <div class="swiper-wrapper" id="gallery-wrapper">
-          <div class="swiper-slide flex items-center justify-center text-white py-32 text-sm">
-            Завантаження фотографій...
-          </div>
-        </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 7: Press & Reviews -->
-  <section id="press" class="py-24 max-w-4xl mx-auto px-6">
-    <div class="text-center max-w-xl mx-auto mb-16">
-      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Critical Acclaim</span>
-      <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Press & Reviews</h2>
-    </div>
-
-    <div id="press-container" class="space-y-8">
-      <div class="text-center text-neutral-400 py-8">Loading press reviews...</div>
-    </div>
-  </section>
-
-  <!-- Section 8: Contacts & Socials -->
-  <section id="contact" class="py-24 bg-neutral-900 text-white">
-    <div class="max-w-5xl mx-auto px-6 text-center space-y-12">
-      <div class="max-w-xl mx-auto space-y-4">
-        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Inquiries</span>
-        <h2 class="text-3xl md:text-4xl font-serif">Contact & Management</h2>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8 text-neutral-300 text-sm">
-        <div class="p-6 bg-neutral-800/50 rounded-sm">
-          <h4 class="text-brand-gold uppercase text-xs tracking-widest mb-2">Direct Contact</h4>
-          <p id="contact-email">info@yuliazassimova.com</p>
-          <p id="contact-phone" class="mt-1 text-neutral-400"></p>
-        </div>
-        <div class="p-6 bg-neutral-800/50 rounded-sm">
-          <h4 class="text-brand-gold uppercase text-xs tracking-widest mb-2">Agency / Management</h4>
-          <p id="contact-agency">General Management</p>
-        </div>
-        <div class="p-6 bg-neutral-800/50 rounded-sm">
-          <h4 class="text-brand-gold uppercase text-xs tracking-widest mb-2">Location</h4>
-          <p id="contact-location">Zurich / Kyiv</p>
-        </div>
-      </div>
-
-      <!-- Social Media Links -->
-      <div class="pt-6 border-t border-neutral-800 flex flex-wrap justify-center gap-6 text-xs uppercase tracking-widest text-neutral-400">
-        <a id="link-instagram" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Instagram</a>
-        <a id="link-facebook" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Facebook</a>
-        <a id="link-youtube" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">YouTube</a>
-        <a id="link-spotify" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Spotify</a>
-        <a id="link-operabase" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">OperaBase</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-6 bg-black text-center text-xs text-neutral-500 border-t border-neutral-800">
-    <p>&copy; 2026 Yuliia Zasimova. All rights reserved.</p>
-  </footer>
-
-  <!-- Swiper.js Script -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-  <!-- CMS Dynamic Data Loader Script -->
-  <script>
-    // Helper to safely fetch JSON
-    async function fetchJSON(url) {
-      try {
-        const res = await fetch(url);
-        if (!res.ok) return null;
-        return await res.json();
-      } catch (e) {
-        return null;
-      }
-    }
-
-    // Load All CMS Content
-    document.addEventListener('DOMContentLoaded', async () => {
-      // 1. Hero
-      const hero = await fetchJSON('/content/hero.json');
-      if (hero) {
-        if (hero.title) document.getElementById('hero-title').innerText = hero.title;
-        if (hero.subtitle) document.getElementById('hero-subtitle').innerText = hero.subtitle;
-        if (hero.main_image) document.getElementById('hero-img').src = hero.main_image;
-      }
-
-      // 2. Biography
-      const bio = await fetchJSON('/content/biography.json');
-      if (bio) {
-        if (bio.title) document.getElementById('bio-title').innerText = bio.title;
-        if (bio.body) document.getElementById('bio-body').innerHTML = bio.body;
-        if (bio.bio_image) document.getElementById('bio-img').src = bio.bio_image;
-      }
-
-      // 3. Schedule
-      const schedule = await fetchJSON('/content/schedule.json');
-      const scheduleEl = document.getElementById('schedule-container');
-      if (schedule && schedule.events && schedule.events.length > 0) {
-        scheduleEl.innerHTML = schedule.events.map(ev => `
-          <div class="bg-brand-card p-6 rounded-sm border border-neutral-200/80 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all">
-            <div class="flex items-center gap-6">
-              <div class="text-center min-w-[70px] border-r border-neutral-200 pr-6">
-                <span class="block text-2xl font-serif font-bold text-neutral-900">${ev.day || ''}</span>
-                <span class="block text-xs uppercase tracking-wider text-brand-gold font-medium">${ev.month || ''}</span>
-              </div>
-              <div>
-                <h3 class="text-lg font-serif font-semibold text-neutral-900">${ev.opera || ''}</h3>
-                <p class="text-sm text-neutral-600">${ev.role ? 'Role: ' + ev.role : ''}</p>
-              </div>
-            </div>
-            <div class="text-left sm:text-right text-xs text-neutral-500 uppercase tracking-wider">
-              <p class="font-medium text-neutral-800">${ev.house || ''}</p>
-              <p>${ev.location || ''}</p>
-            </div>
-          </div>
-        `).join('');
-      } else {
-        scheduleEl.innerHTML = '<div class="text-center text-neutral-400 py-6">No upcoming dates published yet.</div>';
-      }
-
-      // 4. Repertoire
-      const repertoire = await fetchJSON('/content/repertoire.json');
-      const repEl = document.getElementById('repertoire-container');
-      if (repertoire && repertoire.roles && repertoire.roles.length > 0) {
-        repEl.innerHTML = repertoire.roles.map(r => `
-          <div class="p-5 bg-white border border-neutral-200/80 rounded-sm">
-            <span class="text-xs uppercase text-brand-gold font-semibold tracking-wider">${r.composer || ''}</span>
-            <h4 class="text-lg font-serif text-neutral-900 mt-1">${r.opera || ''}</h4>
-            <p class="text-sm text-neutral-600 mt-2">Party: <span class="font-medium text-neutral-800">${r.role || ''}</span></p>
-          </div>
-        `).join('');
-      } else {
-        repEl.innerHTML = '<div class="text-center text-neutral-400 col-span-full py-6">Repertoire list updating...</div>';
-      }
-
-      // 5. Media
-      const media = await fetchJSON('/content/media.json');
-      if (media) {
-        const audioEl = document.getElementById('audio-container');
-        if (media.audio_tracks && media.audio_tracks.length > 0) {
-          audioEl.innerHTML = media.audio_tracks.map(t => `
-            <div class="p-4 bg-brand-card rounded-sm border border-neutral-200 flex flex-col sm:flex-row justify-between items-center gap-4">
-              <div>
-                <h4 class="font-serif font-semibold text-neutral-900">${t.title || ''}</h4>
-                <p class="text-xs text-neutral-500">${t.subtitle || ''}</p>
-              </div>
-              <audio controls class="w-full sm:w-64 h-8">
-                <source src="${t.audio_file}" type="audio/mpeg">
-              </audio>
-            </div>
-          `).join('');
-        }
-
-        const videoEl = document.getElementById('video-container');
-        if (media.videos && media.videos.length > 0) {
-          videoEl.innerHTML = media.videos.map(v => `
-            <div class="p-4 bg-brand-card border border-neutral-200 rounded-sm space-y-2">
-              <h4 class="font-serif font-semibold text-neutral-900">${v.title || ''}</h4>
-              <a href="${v.video_url}" target="_blank" class="inline-block text-xs text-brand-gold hover:underline uppercase tracking-wider">
-                Watch Performance &rarr;
-              </a>
-            </div>
-          `).join('');
-        }
-      }
-
-      // 6. Gallery (Swiper Carousel)
-      const gallery = await fetchJSON('/content/gallery.json');
-      const galleryWrapper = document.getElementById('gallery-wrapper');
-      if (gallery && gallery.photos && gallery.photos.length > 0) {
-        galleryWrapper.innerHTML = gallery.photos.map(p => `
-          <div class="swiper-slide relative">
-            <img src="${p.image}" alt="${p.caption || 'Yuliia Zasimova'}" class="w-full h-[550px] object-cover" />
-            ${p.caption ? `<div class="absolute bottom-0 inset-x-0 p-4 bg-black/60 text-white text-center text-xs tracking-wider backdrop-blur-sm">${p.caption}</div>` : ''}
-          </div>
-        `).join('');
-
-        // Initialize Swiper Carousel
-        new Swiper('.gallery-slider', {
-          loop: true,
-          autoplay: { delay: 4000, disableOnInteraction: false },
-          navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-          pagination: { el: '.swiper-pagination', clickable: true }
-        });
-      } else {
-        galleryWrapper.innerHTML = '<div class="swiper-slide py-20 text-center text-neutral-400">Add photos in CMS Gallery section.</div>';
-      }
-
-      // 7. Press
-      const press = await fetchJSON('/content/press.json');
-      const pressEl = document.getElementById('press-container');
-      if (press && press.reviews && press.reviews.length > 0) {
-        pressEl.innerHTML = press.reviews.map(pr => `
-          <blockquote class="p-8 bg-brand-card border-l-2 border-brand-gold text-neutral-800 space-y-3 rounded-r-sm">
-            <p class="text-lg font-serif italic">"${pr.quote || ''}"</p>
-            <footer class="text-xs uppercase tracking-widest text-neutral-500 font-semibold">
-              — ${pr.source || ''} ${pr.author ? `(${pr.author})` : ''}
-            </footer>
-          </blockquote>
-        `).join('');
-      } else {
-        pressEl.innerHTML = '<div class="text-center text-neutral-400 py-6">No press reviews added yet.</div>';
-      }
-
-      // 8. Contacts & Social Links
-      const contacts = await fetchJSON('/content/contacts.json');
-      if (contacts) {
-        if (contacts.email) document.getElementById('contact-email').innerText = contacts.email;
-        if (contacts.phone) document.getElementById('contact-phone').innerText = contacts.phone;
-        if (contacts.agency) document.getElementById('contact-agency').innerText = contacts.agency;
-        if (contacts.location) document.getElementById('contact-location').innerText = contacts.location;
-
-        const setSocial = (id, url) => {
-          if (url) {
-            const el = document.getElementById(id);
-            el.href = url;
-            el.classList.remove('hidden');
-          }
-        };
-
-        setSocial('link-instagram', contacts.instagram);
-        setSocial('link-facebook', contacts.facebook);
-        setSocial('link-youtube', contacts.youtube);
-        setSocial('link-spotify', contacts.spotify);
-        setSocial('link-operabase', contacts.operabase);
-      }
-    });
-
-    // Netlify Identity Redirection Handler
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-  </script>
-</body>
-</html>
+      <div id="repertoire-container" class="grid sm:grid-cols
