@@ -98,7 +98,11 @@ collections:
         name: "contact_info"
         fields:
           - { label: "E-mail для зв'язку", name: "email", widget: "string" }
-          - { label: "Телефон / Telegram", name: "phone", widget: "string" }
+          - { label: "Телефон / Telegram / WhatsApp", name: "phone", widget: "string" }
+          - { label: "Генеральний менеджер / Агентство", name: "agency", widget: "string" }
           - { label: "Місто, Країна", name: "location", widget: "string" }
-          - { label: "Instagram link", name: "instagram", widget: "string" }
-          - { label: "Facebook link", name: "facebook", widget: "string" }
+          - { label: "Посилання на Instagram", name: "instagram", widget: "string" }
+          - { label: "Посилання на Facebook", name: "facebook", widget: "string" }
+          - { label: "Посилання на YouTube-канал", name: "youtube", widget: "string" }
+          - { label: "Посилання на Spotify / Apple Music", name: "spotify", widget: "string" }
+          - { label: "Посилання на OperaBase", name: "operabase", widget: "string" }
