@@ -1,13 +1,227 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="scroll-smooth">
 <head>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Адмін-панель | Yuliia Zasimova</title>
+  <title>Yuliia Zasimova | Soprano</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              gold: '#c5a059',
+              dark: '#111111',
+              card: '#f9f8f6',
+              bg: '#fcfbf9'
+            }
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Swiper.js CSS (для каруселі) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #fcfbf9; color: #111111; }
+    h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+    .swiper-button-next, .swiper-button-prev { color: #c5a059 !important; }
+    .swiper-pagination-bullet-active { background: #c5a059 !important; }
+  </style>
 </head>
-<body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-</body>
-</html>
+<body class="antialiased">
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-50 bg-[#fcfbf9]/90 backdrop-blur-md border-b border-neutral-200/60 transition-all">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <a href="#" class="text-2xl font-serif font-bold tracking-widest text-neutral-900 uppercase">
+        Yuliia Zasimova
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-8 text-xs font-medium tracking-widest uppercase text-neutral-600">
+        <a href="#biography" class="hover:text-brand-gold transition-colors">Biography</a>
+        <a href="#schedule" class="hover:text-brand-gold transition-colors">Schedule</a>
+        <a href="#repertoire" class="hover:text-brand-gold transition-colors">Repertoire</a>
+        <a href="#media" class="hover:text-brand-gold transition-colors">Listen & Watch</a>
+        <a href="#gallery" class="hover:text-brand-gold transition-colors">Gallery</a>
+        <a href="#press" class="hover:text-brand-gold transition-colors">Press</a>
+        <a href="#contact" class="hover:text-brand-gold transition-colors">Contact</a>
+      </nav>
+
+      <!-- Admin Quick Button -->
+      <a href="/admin/" class="hidden sm:inline-block border border-neutral-800 text-neutral-900 px-4 py-2 text-xs font-semibold uppercase tracking-wider hover:bg-neutral-900 hover:text-white transition-all">
+        CMS Admin
+      </a>
+    </div>
+  </header>
+
+  <!-- Section 1: Hero -->
+  <section id="hero" class="relative min-h-[85vh] flex items-center justify-center py-20 px-6 overflow-hidden">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6 text-left">
+        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Soprano Portfolio</span>
+        <h1 id="hero-title" class="text-5xl md:text-7xl font-serif text-neutral-900 leading-tight">
+          Yuliia Zasimova
+        </h1>
+        <p id="hero-subtitle" class="text-lg md:text-xl text-neutral-600 font-serif italic">
+          International Opera Soprano
+        </p>
+        <div class="pt-4 flex gap-4">
+          <a href="#schedule" class="bg-neutral-900 text-white px-8 py-3 text-xs tracking-widest uppercase hover:bg-brand-gold transition-all">
+            Performances
+          </a>
+          <a href="#contact" class="border border-neutral-300 text-neutral-800 px-8 py-3 text-xs tracking-widest uppercase hover:border-neutral-900 transition-all">
+            Inquire
+          </a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="aspect-[3/4] rounded-sm overflow-hidden shadow-2xl bg-neutral-200">
+          <img id="hero-img" src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1000&auto=format&fit=crop" alt="Yuliia Zasimova" class="w-full h-full object-cover" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Biography -->
+  <section id="biography" class="py-24 bg-brand-card border-y border-neutral-200/60">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid md:grid-cols-12 gap-12 items-center">
+        <div class="md:col-span-5">
+          <img id="bio-img" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1000&auto=format&fit=crop" alt="Yuliia Zasimova Biography" class="w-full h-auto rounded-sm shadow-lg object-cover" />
+        </div>
+        <div class="md:col-span-7 space-y-6">
+          <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">About the Artist</span>
+          <h2 id="bio-title" class="text-3xl md:text-4xl font-serif text-neutral-900">Biography</h2>
+          <div id="bio-body" class="text-neutral-700 leading-relaxed space-y-4 text-sm md:text-base">
+            <p>Celebrated for her sparkling coloratura agility, lyrical warmth, and captivating stage presence, Ukrainian soprano Yuliia Zasimova continues to enthrall audiences across European opera houses and concert halls.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Schedule -->
+  <section id="schedule" class="py-24 max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-xl mx-auto mb-16">
+      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Calendar</span>
+      <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Upcoming Performances</h2>
+    </div>
+
+    <div id="schedule-container" class="space-y-4">
+      <!-- Dynamic Events will load here -->
+      <div class="text-center text-neutral-400 py-8">Loading schedule...</div>
+    </div>
+  </section>
+
+  <!-- Section 4: Repertoire -->
+  <section id="repertoire" class="py-24 bg-brand-card border-y border-neutral-200/60">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center max-w-xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Roles & Operas</span>
+        <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Repertoire</h2>
+      </div>
+
+      <div id="repertoire-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dynamic Repertoire will load here -->
+        <div class="text-center text-neutral-400 col-span-full py-8">Loading repertoire...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Media (Listen & Watch) -->
+  <section id="media" class="py-24 max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-xl mx-auto mb-16">
+      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Audio & Video</span>
+      <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Listen & Watch</h2>
+    </div>
+
+    <!-- Audio Tracks -->
+    <div class="mb-16">
+      <h3 class="text-xl font-serif mb-6 text-neutral-800 border-b pb-2">Audio Studio</h3>
+      <div id="audio-container" class="space-y-4">
+        <div class="text-neutral-400 text-sm">No audio recordings available yet.</div>
+      </div>
+    </div>
+
+    <!-- Video Embeds -->
+    <div>
+      <h3 class="text-xl font-serif mb-6 text-neutral-800 border-b pb-2">Featured Videos</h3>
+      <div id="video-container" class="grid md:grid-cols-2 gap-6">
+        <div class="text-neutral-400 text-sm col-span-full">No video recordings available yet.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Gallery Carousel -->
+  <section id="gallery" class="py-24 bg-brand-card border-y border-neutral-200/60">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center max-w-xl mx-auto mb-12">
+        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Portraits & Stage</span>
+        <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Photo Gallery</h2>
+      </div>
+
+      <!-- Swiper Slider Container -->
+      <div class="swiper gallery-slider max-w-4xl mx-auto rounded-sm overflow-hidden shadow-xl bg-neutral-900">
+        <div class="swiper-wrapper" id="gallery-wrapper">
+          <div class="swiper-slide flex items-center justify-center text-white py-32 text-sm">
+            Завантаження фотографій...
+          </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Press & Reviews -->
+  <section id="press" class="py-24 max-w-4xl mx-auto px-6">
+    <div class="text-center max-w-xl mx-auto mb-16">
+      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Critical Acclaim</span>
+      <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Press & Reviews</h2>
+    </div>
+
+    <div id="press-container" class="space-y-8">
+      <div class="text-center text-neutral-400 py-8">Loading press reviews...</div>
+    </div>
+  </section>
+
+  <!-- Section 8: Contacts & Socials -->
+  <section id="contact" class="py-24 bg-neutral-900 text-white">
+    <div class="max-w-5xl mx-auto px-6 text-center space-y-12">
+      <div class="max-w-xl mx-auto space-y-4">
+        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Inquiries</span>
+        <h2 class="text-3xl md:text-4xl font-serif">Contact & Management</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 text-neutral-300 text-sm">
+        <div class="p-6 bg-neutral-800/50 rounded-sm">
+          <h4 class="text-brand-gold uppercase text-xs tracking-widest mb-2">Direct Contact</h4>
+          <p id="contact-email">info@yuliazassimova.com</p>
+          <p id="contact-phone" class="mt-1 text-neutral-400"></p>
+        </div>
+        <div class="p-6 bg-neutral-800/50 rounded-sm">
+          <h4 class="text-brand-gold uppercase text-xs tracking-widest mb-2">Agency / Management</h4>
+          <p id="contact-agency">General Management</p>
+        </div>
+        <div class="p-6 bg-neutral-800/50 rounded-sm">
+          <h4 class="text-brand-gold uppercase text-xs tracking-wid
