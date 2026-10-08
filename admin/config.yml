@@ -14,7 +14,7 @@ collections:
         name: "hero_section"
         fields:
           - { label: "Заголовок / Ім'я співачки", name: "title", widget: "string" }
-          - { label: "Підзаголовок / Титул (наприклад: Opera Soprano)", name: "subtitle", widget: "string" }
+          - { label: "Підзаголовок / Титул", name: "subtitle", widget: "string" }
           - { label: "Головне фото співачки", name: "main_image", widget: "image" }
 
       - file: "content/biography.json"
@@ -44,9 +44,11 @@ collections:
         label: "4. Репертуар"
         name: "repertoire_section"
         fields:
-          - label: "Список Ролей та Опер", name: "roles", widget: "list"
+          - label: "Список Ролей та Опер"
+            name: "roles"
+            widget: "list"
             fields:
-              - { label: "Композитор (наприклад: W. A. Mozart)", name: "composer", widget: "string" }
+              - { label: "Композитор", name: "composer", widget: "string" }
               - { label: "Опера / Твір", name: "opera", widget: "string" }
               - { label: "Партія / Роль", name: "role", widget: "string" }
 
@@ -54,21 +56,27 @@ collections:
         label: "5. Аудіо та Відео (Listen)"
         name: "media_section"
         fields:
-          - label: "Аудіозаписи", name: "audio_tracks", widget: "list"
+          - label: "Аудіозаписи"
+            name: "audio_tracks"
+            widget: "list"
             fields:
               - { label: "Назва арії / треку", name: "title", widget: "string" }
               - { label: "Опера / Композитор", name: "subtitle", widget: "string" }
               - { label: "Завантажити файл (MP3)", name: "audio_file", widget: "file" }
-          - label: "Відеозаписи (YouTube / Vimeo)", name: "videos", widget: "list"
+          - label: "Відеозаписи (YouTube / Vimeo)"
+            name: "videos"
+            widget: "list"
             fields:
               - { label: "Назва виступу", name: "title", widget: "string" }
-              - { label: "Посиланням на YouTube/Vimeo", name: "video_url", widget: "string" }
+              - { label: "Посилання на YouTube/Vimeo", name: "video_url", widget: "string" }
 
       - file: "content/gallery.json"
         label: "6. Галерея фото"
         name: "gallery_section"
         fields:
-          - label: "Список фотографій", name: "photos", widget: "list"
+          - label: "Список фотографій"
+            name: "photos"
+            widget: "list"
             fields:
               - { label: "Завантажити фото", name: "image", widget: "image" }
               - { label: "Підпис / Опис фото", name: "caption", widget: "string" }
@@ -77,7 +85,9 @@ collections:
         label: "7. Преса та Відгуки"
         name: "press_section"
         fields:
-          - label: "Цитати / Відгуки критики", name: "reviews", widget: "list"
+          - label: "Цитати / Відгуки критики"
+            name: "reviews"
+            widget: "list"
             fields:
               - { label: "Цитата", name: "quote", widget: "text" }
               - { label: "Видання / Газета", name: "source", widget: "string" }
