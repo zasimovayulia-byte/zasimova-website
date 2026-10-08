@@ -6,11 +6,27 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "schedule"
-    label: "Афіша та Виступи"
+  - name: "pages"
+    label: "Розділи Сайту"
     files:
+      - file: "content/hero.json"
+        label: "1. Головна сторінка (Hero)"
+        name: "hero_section"
+        fields:
+          - { label: "Заголовок / Ім'я співачки", name: "title", widget: "string" }
+          - { label: "Підзаголовок / Титул (наприклад: Opera Soprano)", name: "subtitle", widget: "string" }
+          - { label: "Головне фото співачки", name: "main_image", widget: "image" }
+
+      - file: "content/biography.json"
+        label: "2. Біографія"
+        name: "biography_section"
+        fields:
+          - { label: "Заголовок розділу", name: "title", widget: "string" }
+          - { label: "Повний текст біографії", name: "body", widget: "markdown" }
+          - { label: "Портрет для Біографії", name: "bio_image", widget: "image" }
+
       - file: "content/schedule.json"
-        label: "Список Концертів"
+        label: "3. Афіша та Виступи"
         name: "events_list"
         fields:
           - label: "Виступи"
@@ -20,17 +36,59 @@ collections:
               - { label: "День (наприклад: 18)", name: "day", widget: "string" }
               - { label: "Місяць та Рік (наприклад: Лист 2026)", name: "month", widget: "string" }
               - { label: "Роль / Партія", name: "role", widget: "string" }
-              - { label: "Назва Опери", name: "opera", widget: "string" }
+              - { label: "Назва Опери / Концерту", name: "opera", widget: "string" }
               - { label: "Театр / Зал", name: "house", widget: "string" }
               - { label: "Місто, Країна", name: "location", widget: "string" }
 
-  - name: "contacts"
-    label: "Контакти та Менеджмент"
-    files:
+      - file: "content/repertoire.json"
+        label: "4. Репертуар"
+        name: "repertoire_section"
+        fields:
+          - label: "Список Ролей та Опер", name: "roles", widget: "list"
+            fields:
+              - { label: "Композитор (наприклад: W. A. Mozart)", name: "composer", widget: "string" }
+              - { label: "Опера / Твір", name: "opera", widget: "string" }
+              - { label: "Партія / Роль", name: "role", widget: "string" }
+
+      - file: "content/media.json"
+        label: "5. Аудіо та Відео (Listen)"
+        name: "media_section"
+        fields:
+          - label: "Аудіозаписи", name: "audio_tracks", widget: "list"
+            fields:
+              - { label: "Назва арії / треку", name: "title", widget: "string" }
+              - { label: "Опера / Композитор", name: "subtitle", widget: "string" }
+              - { label: "Завантажити файл (MP3)", name: "audio_file", widget: "file" }
+          - label: "Відеозаписи (YouTube / Vimeo)", name: "videos", widget: "list"
+            fields:
+              - { label: "Назва виступу", name: "title", widget: "string" }
+              - { label: "Посиланням на YouTube/Vimeo", name: "video_url", widget: "string" }
+
+      - file: "content/gallery.json"
+        label: "6. Галерея фото"
+        name: "gallery_section"
+        fields:
+          - label: "Список фотографій", name: "photos", widget: "list"
+            fields:
+              - { label: "Завантажити фото", name: "image", widget: "image" }
+              - { label: "Підпис / Опис фото", name: "caption", widget: "string" }
+
+      - file: "content/press.json"
+        label: "7. Преса та Відгуки"
+        name: "press_section"
+        fields:
+          - label: "Цитати / Відгуки критики", name: "reviews", widget: "list"
+            fields:
+              - { label: "Цитата", name: "quote", widget: "text" }
+              - { label: "Видання / Газета", name: "source", widget: "string" }
+              - { label: "Автор / Критик", name: "author", widget: "string" }
+
       - file: "content/contacts.json"
-        label: "Прямі Контакти"
+        label: "8. Контакти та Менеджмент"
         name: "contact_info"
         fields:
           - { label: "E-mail для зв'язку", name: "email", widget: "string" }
           - { label: "Телефон / Telegram", name: "phone", widget: "string" }
-          - { label: "Локація (Місто, Країна)", name: "location", widget: "string" }
+          - { label: "Місто, Країна", name: "location", widget: "string" }
+          - { label: "Instagram link", name: "instagram", widget: "string" }
+          - { label: "Facebook link", name: "facebook", widget: "string" }
