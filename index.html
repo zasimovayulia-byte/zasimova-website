@@ -45,7 +45,7 @@
     .swiper-button-next, .swiper-button-prev { color: #c5a059 !important; }
     .swiper-pagination-bullet-active { background: #c5a059 !important; }
 
-    /* Ефекти взаємодії при наведенні */
+    /* Ефекти взаємодії та мікро-збільшення на 3% */
     a, button,
     .swiper-button-next, .swiper-button-prev,
     #schedule-container > div {
@@ -104,10 +104,10 @@
     </div>
   </header>
 
-  <!-- Section 1: Hero (Full Background) -->
+  <!-- Section 1: Hero (Повноекранний фон) -->
   <section id="hero" class="relative min-h-[90vh] flex items-center justify-center py-24 px-6 overflow-hidden bg-[#fcfbf9]">
     <div class="absolute inset-0 z-0">
-      <img id="hero-img" src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1920&auto=format&fit=crop" alt="Yuliia Zasimova" class="w-full h-full object-cover object-center" />
+      <img id="hero-img" src="/images/uploads/8e8ce5ed-f616-4a3e-a9e0-c0c9e7ff8751.jpeg" alt="Yuliia Zasimova" class="w-full h-full object-cover object-center" />
       <div class="absolute inset-0 bg-gradient-to-r from-[#fcfbf9]/95 via-[#fcfbf9]/75 to-transparent"></div>
     </div>
 
@@ -115,10 +115,10 @@
       <div class="space-y-6 text-left max-w-xl">
         <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold bg-white/80 px-3 py-1 rounded-sm shadow-sm inline-block">Soprano Portfolio</span>
         <h1 id="hero-title" class="text-5xl md:text-7xl font-serif text-neutral-900 leading-tight drop-shadow-sm">
-          Yuliia Zasimova
+          Yuliia ZASIMOVA
         </h1>
         <p id="hero-subtitle" class="text-lg md:text-xl text-neutral-800 font-serif italic">
-          International Opera Soprano
+          soprano
         </p>
         <div class="pt-4 flex flex-wrap gap-4">
           <a href="#schedule" class="bg-neutral-900 text-white px-8 py-3 text-xs tracking-widest uppercase hover:bg-brand-gold transition-all shadow-md">
@@ -137,7 +137,7 @@
     <div class="max-w-5xl mx-auto px-6">
       <div class="grid md:grid-cols-12 gap-12 items-center">
         <div class="md:col-span-5">
-          <img id="bio-img" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1000&auto=format&fit=crop" alt="Yuliia Zasimova Biography" class="w-full h-auto rounded-sm shadow-lg object-cover" />
+          <img id="bio-img" src="/images/uploads/8e8ce5ed-f616-4a3e-a9e0-c0c9e7ff8751.jpeg" alt="Yuliia Zasimova Biography" class="w-full h-auto rounded-sm shadow-lg object-cover" />
         </div>
         <div class="md:col-span-7 space-y-6">
           <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">About the Artist</span>
@@ -255,6 +255,7 @@
         </div>
       </div>
 
+      <!-- Посилання на соціальні мережі -->
       <div class="pt-6 border-t border-neutral-800 flex flex-wrap justify-center gap-6 text-xs uppercase tracking-widest text-neutral-400">
         <a id="link-instagram" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Instagram</a>
         <a id="link-facebook" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Facebook</a>
@@ -273,7 +274,7 @@
   <!-- Swiper.js Script -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-  <!-- CMS Dynamic Data Loader Script -->
+  <!-- Скрипт завантаження даних з CMS -->
   <script>
     async function fetchJSON(url) {
       try {
@@ -288,8 +289,14 @@
     document.addEventListener('DOMContentLoaded', async () => {
       // 1. Hero
       const hero = await fetchJSON('/content/hero.json');
-      if (hero && hero.main_image) {
-        document.getElementById('hero-img').src = hero.main_image;
+      if (hero) {
+        if (hero.main_image) {
+          let imgUrl = hero.main_image;
+          if (!imgUrl.startsWith('/') && !imgUrl.startsWith('http')) {
+            imgUrl = '/' + imgUrl;
+          }
+          document.getElementById('hero-img').src = imgUrl;
+        }
         if (hero.title) document.getElementById('hero-title').innerText = hero.title;
         if (hero.subtitle) document.getElementById('hero-subtitle').innerText = hero.subtitle;
       }
@@ -299,7 +306,11 @@
       if (bio) {
         if (bio.title) document.getElementById('bio-title').innerText = bio.title;
         if (bio.body) document.getElementById('bio-body').innerHTML = bio.body;
-        if (bio.bio_image) document.getElementById('bio-img').src = bio.bio_image;
+        if (bio.bio_image) {
+          let bioImg = bio.bio_image;
+          if (!bioImg.startsWith('/') && !bioImg.startsWith('http')) bioImg = '/' + bioImg;
+          document.getElementById('bio-img').src = bioImg;
+        }
       }
 
       // 3. Schedule
