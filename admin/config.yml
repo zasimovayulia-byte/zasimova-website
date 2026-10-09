@@ -6,103 +6,100 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "pages"
-    label: "Розділи Сайту"
-    files:
-      - file: "content/hero.json"
-        label: "1. Головна сторінка (Hero)"
-        name: "hero_section"
-        fields:
-          - { label: "Заголовок / Ім'я співачки", name: "title", widget: "string" }
-          - { label: "Підзаголовок / Титул", name: "subtitle", widget: "string" }
-          - { label: "Головне фото співачки", name: "main_image", widget: "image" }
+  - name: "hero"
+    label: "1. Головна сторінка (Hero)"
+    file: "content/hero.json"
+    fields:
+      - { label: "Заголовок (Ім'я)", name: "title", widget: "string", default: "Yuliia ZASIMOVA" }
+      - { label: "Підзаголовок (Тип голосу)", name: "subtitle", widget: "string", default: "soprano" }
+      - { label: "Головне фото співачки (Фон)", name: "main_image", widget: "image" }
 
-      - file: "content/biography.json"
-        label: "2. Біографія"
-        name: "biography_section"
-        fields:
-          - { label: "Заголовок розділу", name: "title", widget: "string" }
-          - { label: "Повний текст біографії", name: "body", widget: "markdown" }
-          - { label: "Портрет для Біографії", name: "bio_image", widget: "image" }
+  - name: "biography"
+    label: "2. Біографія"
+    file: "content/biography.json"
+    fields:
+      - { label: "Заголовок", name: "title", widget: "string", default: "Biography" }
+      - { label: "Текст біографії", name: "body", widget: "markdown" }
+      - { label: "Фото для біографії", name: "bio_image", widget: "image" }
 
-      - file: "content/schedule.json"
-        label: "3. Афіша та Виступи"
-        name: "events_list"
+  - name: "schedule"
+    label: "3. Афіша виступів"
+    file: "content/schedule.json"
+    fields:
+      - label: "Список виступів"
+        name: "events"
+        widget: "list"
         fields:
-          - label: "Виступи"
-            name: "events"
-            widget: "list"
-            fields:
-              - { label: "День (наприклад: 18)", name: "day", widget: "string" }
-              - { label: "Місяць та Рік (наприклад: Лист 2026)", name: "month", widget: "string" }
-              - { label: "Роль / Партія", name: "role", widget: "string" }
-              - { label: "Назва Опери / Концерту", name: "opera", widget: "string" }
-              - { label: "Театр / Зал", name: "house", widget: "string" }
-              - { label: "Місто, Країна", name: "location", widget: "string" }
+          - { label: "День (число)", name: "day", widget: "string" }
+          - { label: "Місяць (наприклад, OCT)", name: "month", widget: "string" }
+          - { label: "Назва опери / Концерт", name: "opera", widget: "string" }
+          - { label: "Партія / Роль", name: "role", widget: "string" }
+          - { label: "Театр / Оперний дім", name: "house", widget: "string" }
+          - { label: "Місто / Країна", name: "location", widget: "string" }
 
-      - file: "content/repertoire.json"
-        label: "4. Репертуар"
-        name: "repertoire_section"
+  - name: "repertoire"
+    label: "4. Репертуар"
+    file: "content/repertoire.json"
+    fields:
+      - label: "Список ролей"
+        name: "roles"
+        widget: "list"
         fields:
-          - label: "Список Ролей та Опер"
-            name: "roles"
-            widget: "list"
-            fields:
-              - { label: "Композитор", name: "composer", widget: "string" }
-              - { label: "Опера / Твір", name: "opera", widget: "string" }
-              - { label: "Партія / Роль", name: "role", widget: "string" }
+          - { label: "Композитор", name: "composer", widget: "string" }
+          - { label: "Опера", name: "opera", widget: "string" }
+          - { label: "Партія / Роль", name: "role", widget: "string" }
 
-      - file: "content/media.json"
-        label: "5. Аудіо та Відео (Listen)"
-        name: "media_section"
+  - name: "media"
+    label: "5. Аудіо та Відео"
+    file: "content/media.json"
+    fields:
+      - label: "Аудіозаписи"
+        name: "audio_tracks"
+        widget: "list"
         fields:
-          - label: "Аудіозаписи"
-            name: "audio_tracks"
-            widget: "list"
-            fields:
-              - { label: "Назва арії / треку", name: "title", widget: "string" }
-              - { label: "Опера / Композитор", name: "subtitle", widget: "string" }
-              - { label: "Завантажити файл (MP3)", name: "audio_file", widget: "file" }
-          - label: "Відеозаписи (YouTube / Vimeo)"
-            name: "videos"
-            widget: "list"
-            fields:
-              - { label: "Назва виступу", name: "title", widget: "string" }
-              - { label: "Посилання на YouTube/Vimeo", name: "video_url", widget: "string" }
+          - { label: "Назва арії / твору", name: "title", widget: "string" }
+          - { label: "Опис / Оперна партія", name: "subtitle", widget: "string" }
+          - { label: "Аудіофайл (MP3)", name: "audio_file", widget: "file" }
+      - label: "Відеозаписи"
+        name: "videos"
+        widget: "list"
+        fields:
+          - { label: "Назва виступу", name: "title", widget: "string" }
+          - { label: "Посилання на YouTube/Vimeo", name: "video_url", widget: "string" }
 
-      - file: "content/gallery.json"
-        label: "6. Галерея фото"
-        name: "gallery_section"
+  - name: "gallery"
+    label: "6. Фотогалерея"
+    file: "content/gallery.json"
+    fields:
+      - label: "Фотографії галереї"
+        name: "photos"
+        widget: "list"
         fields:
-          - label: "Список фотографій"
-            name: "photos"
-            widget: "list"
-            fields:
-              - { label: "Завантажити фото", name: "image", widget: "image" }
-              - { label: "Підпис / Опис фото", name: "caption", widget: "string" }
+          - { label: "Фотографія", name: "image", widget: "image" }
+          - { label: "Підпис / Опис", name: "caption", widget: "string", required: false }
 
-      - file: "content/press.json"
-        label: "7. Преса та Відгуки"
-        name: "press_section"
+  - name: "press"
+    label: "7. Преса та відгуки"
+    file: "content/press.json"
+    fields:
+      - label: "Цитати критики"
+        name: "reviews"
+        widget: "list"
         fields:
-          - label: "Цитати / Відгуки критики"
-            name: "reviews"
-            widget: "list"
-            fields:
-              - { label: "Цитата", name: "quote", widget: "text" }
-              - { label: "Видання / Газета", name: "source", widget: "string" }
-              - { label: "Автор / Критик", name: "author", widget: "string" }
+          - { label: "Цитата", name: "quote", widget: "text" }
+          - { label: "Видання (наприклад, Opera Magazine)", name: "source", widget: "string" }
+          - { label: "Автор рецензії", name: "author", widget: "string", required: false }
 
-      - file: "content/contacts.json"
-        label: "8. Контакти та Менеджмент"
-        name: "contact_info"
-        fields:
-          - { label: "E-mail для зв'язку", name: "email", widget: "string" }
-          - { label: "Телефон / Telegram / WhatsApp", name: "phone", widget: "string" }
-          - { label: "Генеральний менеджер / Агентство", name: "agency", widget: "string" }
-          - { label: "Місто, Країна", name: "location", widget: "string" }
-          - { label: "Посилання на Instagram", name: "instagram", widget: "string" }
-          - { label: "Посилання на Facebook", name: "facebook", widget: "string" }
-          - { label: "Посилання на YouTube-канал", name: "youtube", widget: "string" }
-          - { label: "Посилання на Spotify / Apple Music", name: "spotify", widget: "string" }
-          - { label: "Посилання на OperaBase", name: "operabase", widget: "string" }
+  - name: "contacts"
+    label: "8. Контакти та Соцмережі"
+    file: "content/contacts.json"
+    fields:
+      - { label: "Email", name: "email", widget: "string" }
+      - { label: "Телефон", name: "phone", widget: "string", required: false }
+      - { label: "Агентство / Менеджмент", name: "agency", widget: "string", required: false }
+      - { label: "Локація / Базування", name: "location", widget: "string", default: "Zurich / Kyiv" }
+      - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+      - { label: "Facebook URL", name: "facebook", widget: "string", required: false }
+      - { label: "YouTube URL", name: "youtube", widget: "string", required: false }
+      - { label: "Spotify URL", name: "spotify", widget: "string", required: false }
+      - { label: "OperaBase URL", name: "operabase", widget: "string", required: false }
