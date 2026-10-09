@@ -1,1270 +1,459 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuliia Zasimova | Soprano</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              gold: '#c5a059',
+              dark: '#111111',
+              card: '#f9f8f6',
+              bg: '#fcfbf9'
+            }
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Swiper.js CSS (для каруселі) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #fcfbf9; color: #111111; }
+    h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+    .swiper-button-next, .swiper-button-prev { color: #c5a059 !important; }
+    .swiper-pagination-bullet-active { background: #c5a059 !important; }
+
+    /* --- ЕФЕКТИ ВЗАЄМОДІЇ ТА ЗБІЛЬШЕННЯ КНОПОК --- */
+    a, button,
+    .swiper-button-next, .swiper-button-prev,
+    #schedule-container > div {
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+      will-change: transform;
+    }
+
+    a, button {
+      display: inline-block;
+    }
+
+    /* Мікро-збільшення на 3% при наведенні */
+    a:hover, button:hover,
+    .swiper-button-next:hover, .swiper-button-prev:hover {
+      transform: scale(1.03);
+    }
+
+    /* Ефект пружинистого натискання */
+    a:active, button:active,
+    .swiper-button-next:active, .swiper-button-prev:active {
+      transform: scale(0.98);
+    }
+
+    /* Картки афіші */
+    #schedule-container > div {
+      cursor: pointer;
+    }
+    #schedule-container > div:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
+      border-color: #c5a059 !important;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-50 bg-[#fcfbf9]/90 backdrop-blur-md border-b border-neutral-200/60 transition-all">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <a href="#" class="text-2xl font-serif font-bold tracking-widest text-neutral-900 uppercase">
+        Yuliia Zasimova
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-8 text-xs font-medium tracking-widest uppercase text-neutral-600">
+        <a href="#biography" class="hover:text-brand-gold transition-colors">Biography</a>
+        <a href="#schedule" class="hover:text-brand-gold transition-colors">Schedule</a>
+        <a href="#repertoire" class="hover:text-brand-gold transition-colors">Repertoire</a>
+        <a href="#media" class="hover:text-brand-gold transition-colors">Listen & Watch</a>
+        <a href="#gallery" class="hover:text-brand-gold transition-colors">Gallery</a>
+        <a href="#press" class="hover:text-brand-gold transition-colors">Press</a>
+        <a href="#contact" class="hover:text-brand-gold transition-colors">Contact</a>
+      </nav>
+
+      <!-- Admin Quick Button -->
+      <a href="/admin/" class="hidden sm:inline-block border border-neutral-800 text-neutral-900 px-4 py-2 text-xs font-semibold uppercase tracking-wider hover:bg-neutral-900 hover:text-white transition-all shadow-sm">
+        CMS Admin
+      </a>
+    </div>
+  </header>
+
+  <!-- Section 1: Hero з фотографією на повному задньому фоні -->
+  <section id="hero" class="relative min-h-[90vh] flex items-center justify-center py-24 px-6 overflow-hidden bg-[#fcfbf9]">
+    <!-- Фонове зображення на весь екран з фірмовим світлим тонуванням -->
+    <div class="absolute inset-0 z-0">
+      <img id="hero-img" src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1920&auto=format&fit=crop" alt="Yuliia Zasimova" class="w-full h-full object-cover object-center" />
+      <!-- М'який світлий градієнт-вуаль для ідеальної читабельності тексту поверх фото -->
+      <div class="absolute inset-0 bg-gradient-to-r from-[#fcfbf9]/95 via-[#fcfbf9]/70 to-transparent"></div>
+    </div>
+
+    <!-- Контент поверх фонової фотографії -->
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-6 grid md:grid-cols-2 items-center">
+      <div class="space-y-6 text-left max-w-xl">
+        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold bg-white/80 px-3 py-1 rounded-sm shadow-sm inline-block">Soprano Portfolio</span>
+        <h1 id="hero-title" class="text-5xl md:text-7xl font-serif text-neutral-900 leading-tight drop-shadow-sm">
+          Yuliia Zasimova
+        </h1>
+        <p id="hero-subtitle" class="text-lg md:text-xl text-neutral-800 font-serif italic">
+          International Opera Soprano
+        </p>
+        <div class="pt-4 flex flex-wrap gap-4">
+          <a href="#schedule" class="bg-neutral-900 text-white px-8 py-3 text-xs tracking-widest uppercase hover:bg-brand-gold transition-all shadow-md">
+            Performances
+          </a>
+          <a href="#contact" class="border border-neutral-800 bg-white/80 backdrop-blur-sm text-neutral-900 px-8 py-3 text-xs tracking-widest uppercase hover:bg-neutral-900 hover:text-white transition-all shadow-sm">
+            Inquire
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Biography -->
+  <section id="biography" class="py-24 bg-brand-card border-y border-neutral-200/60">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid md:grid-cols-12 gap-12 items-center">
+        <div class="md:col-span-5">
+          <img id="bio-img" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1000&auto=format&fit=crop" alt="Yuliia Zasimova Biography" class="w-full h-auto rounded-sm shadow-lg object-cover" />
+        </div>
+        <div class="md:col-span-7 space-y-6">
+          <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">About the Artist</span>
+          <h2 id="bio-title" class="text-3xl md:text-4xl font-serif text-neutral-900">Biography</h2>
+          <div id="bio-body" class="text-neutral-700 leading-relaxed space-y-4 text-sm md:text-base">
+            <p>Celebrated for her sparkling coloratura agility, lyrical warmth, and captivating stage presence, Ukrainian soprano Yuliia Zasimova continues to enthrall audiences across European opera houses and concert halls.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Schedule -->
+  <section id="schedule" class="py-24 max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-xl mx-auto mb-16">
+      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Calendar</span>
+      <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Upcoming Performances</h2>
+    </div>
+
+    <div id="schedule-container" class="space-y-4">
+      <div class="text-center text-neutral-400 py-8">Loading schedule...</div>
+    </div>
+  </section>
+
+  <!-- Section 4: Repertoire -->
+  <section id="repertoire" class="py-24 bg-brand-card border-y border-neutral-200/60">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center max-w-xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Roles & Operas</span>
+        <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Repertoire</h2>
+      </div>
+
+      <div id="repertoire-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="text-center text-neutral-400 col-span-full py-8">Loading repertoire...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Media (Listen & Watch) -->
+  <section id="media" class="py-24 max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-xl mx-auto mb-16">
+      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Audio & Video</span>
+      <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Listen & Watch</h2>
+    </div>
+
+    <!-- Audio Tracks -->
+    <div class="mb-16">
+      <h3 class="text-xl font-serif mb-6 text-neutral-800 border-b pb-2">Audio Studio</h3>
+      <div id="audio-container" class="space-y-4">
+        <div class="text-neutral-400 text-sm">No audio recordings available yet.</div>
+      </div>
+    </div>
+
+    <!-- Video Embeds -->
+    <div>
+      <h3 class="text-xl font-serif mb-6 text-neutral-800 border-b pb-2">Featured Videos</h3>
+      <div id="video-container" class="grid md:grid-cols-2 gap-6">
+        <div class="text-neutral-400 text-sm col-span-full">No video recordings available yet.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Gallery Carousel -->
+  <section id="gallery" class="py-24 bg-brand-card border-y border-neutral-200/60">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center max-w-xl mx-auto mb-12">
+        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Portraits & Stage</span>
+        <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Photo Gallery</h2>
+      </div>
+
+      <!-- Swiper Slider Container -->
+      <div class="swiper gallery-slider max-w-4xl mx-auto rounded-sm overflow-hidden shadow-xl bg-neutral-900">
+        <div class="swiper-wrapper" id="gallery-wrapper">
+          <div class="swiper-slide flex items-center justify-center text-white py-32 text-sm">
+            Завантаження фотографій...
+          </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Press & Reviews -->
+  <section id="press" class="py-24 max-w-4xl mx-auto px-6">
+    <div class="text-center max-w-xl mx-auto mb-16">
+      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Critical Acclaim</span>
+      <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Press & Reviews</h2>
+    </div>
+
+    <div id="press-container" class="space-y-8">
+      <div class="text-center text-neutral-400 py-8">Loading press reviews...</div>
+    </div>
+  </section>
+
+  <!-- Section 8: Contacts & Socials -->
+  <section id="contact" class="py-24 bg-neutral-900 text-white">
+    <div class="max-w-5xl mx-auto px-6 text-center space-y-12">
+      <div class="max-w-xl mx-auto space-y-4">
+        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Inquiries</span>
+        <h2 class="text-3xl md:text-4xl font-serif">Contact & Management</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 text-neutral-300 text-sm">
+        <div class="p-6 bg-neutral-800/50 rounded-sm">
+          <h4 class="text-brand-gold uppercase text-xs tracking-widest mb-2">Direct Contact</h4>
+          <p id="contact-email">info@yuliazassimova.com</p>
+          <p id="contact-phone" class="mt-1 text-neutral-400"></p>
+        </div>
+        <div class="p-6 bg-neutral-800/50 rounded-sm">
+          <h4 class="text-brand-gold uppercase text-xs tracking-widest mb-2">Agency / Management</h4>
+          <p id="contact-agency">General Management</p>
+        </div>
+        <div class="p-6 bg-neutral-800/50 rounded-sm">
+          <h4 class="text-brand-gold uppercase text-xs tracking-widest mb-2">Location</h4>
+          <p id="contact-location">Zurich / Kyiv</p>
+        </div>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="pt-6 border-t border-neutral-800 flex flex-wrap justify-center gap-6 text-xs uppercase tracking-widest text-neutral-400">
+        <a id="link-instagram" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Instagram</a>
+        <a id="link-facebook" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Facebook</a>
+        <a id="link-youtube" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">YouTube</a>
+        <a id="link-spotify" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Spotify</a>
+        <a id="link-operabase" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">OperaBase</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-6 bg-black text-center text-xs text-neutral-500 border-t border-neutral-800">
+    <p>&copy; 2026 Yuliia Zasimova. All rights reserved.</p>
+  </footer>
+
+  <!-- Swiper.js Script -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- CMS Dynamic Data Loader Script -->
+  <script>
+    async function fetchJSON(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) return null;
+        return await res.json();
+      } catch (e) {
+        return null;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Hero
+      const hero = await fetchJSON('/content/hero.json');
+      if (hero) {
+        if (hero.title) document.getElementById('hero-title').innerText = hero.title;
+        if (hero.subtitle) document.getElementById('hero-subtitle').innerText = hero.subtitle;
+        if (hero.main_image) document.getElementById('hero-img').src = hero.main_image;
+      }
+
+      // 2. Biography
+      const bio = await fetchJSON('/content/biography.json');
+      if (bio) {
+        if (bio.title) document.getElementById('bio-title').innerText = bio.title;
+        if (bio.body) document.getElementById('bio-body').innerHTML = bio.body;
+        if (bio.bio_image) document.getElementById('bio-img').src = bio.bio_image;
+      }
+
+      // 3. Schedule
+      const schedule = await fetchJSON('/content/schedule.json');
+      const scheduleEl = document.getElementById('schedule-container');
+      if (schedule && schedule.events && schedule.events.length > 0) {
+        scheduleEl.innerHTML = schedule.events.map(ev => `
+          <div class="bg-brand-card p-6 rounded-sm border border-neutral-200/80 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all">
+            <div class="flex items-center gap-6">
+              <div class="text-center min-w-[70px] border-r border-neutral-200 pr-6">
+                <span class="block text-2xl font-serif font-bold text-neutral-900">${ev.day || ''}</span>
+                <span class="block text-xs uppercase tracking-wider text-brand-gold font-medium">${ev.month || ''}</span>
+              </div>
+              <div>
+                <h3 class="text-lg font-serif font-semibold text-neutral-900">${ev.opera || ''}</h3>
+                <p class="text-sm text-neutral-600">${ev.role ? 'Role: ' + ev.role : ''}</p>
+              </div>
+            </div>
+            <div class="text-left sm:text-right text-xs text-neutral-500 uppercase tracking-wider">
+              <p class="font-medium text-neutral-800">${ev.house || ''}</p>
+              <p>${ev.location || ''}</p>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        scheduleEl.innerHTML = '<div class="text-center text-neutral-400 py-6">No upcoming dates published yet.</div>';
+      }
+
+      // 4. Repertoire
+      const repertoire = await fetchJSON('/content/repertoire.json');
+      const repEl = document.getElementById('repertoire-container');
+      if (repertoire && repertoire.roles && repertoire.roles.length > 0) {
+        repEl.innerHTML = repertoire.roles.map(r => `
+          <div class="p-5 bg-white border border-neutral-200/80 rounded-sm">
+            <span class="text-xs uppercase text-brand-gold font-semibold tracking-wider">${r.composer || ''}</span>
+            <h4 class="text-lg font-serif text-neutral-900 mt-1">${r.opera || ''}</h4>
+            <p class="text-sm text-neutral-600 mt-2">Party: <span class="font-medium text-neutral-800">${r.role || ''}</span></p>
+          </div>
+        `).join('');
+      } else {
+        repEl.innerHTML = '<div class="text-center text-neutral-400 col-span-full py-6">Repertoire list updating...</div>';
+      }
+
+      // 5. Media
+      const media = await fetchJSON('/content/media.json');
+      if (media) {
+        const audioEl = document.getElementById('audio-container');
+        if (media.audio_tracks && media.audio_tracks.length > 0) {
+          audioEl.innerHTML = media.audio_tracks.map(t => `
+            <div class="p-4 bg-brand-card rounded-sm border border-neutral-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+              <div>
+                <h4 class="font-serif font-semibold text-neutral-900">${t.title || ''}</h4>
+                <p class="text-xs text-neutral-500">${t.subtitle || ''}</p>
+              </div>
+              <audio controls class="w-full sm:w-64 h-8">
+                <source src="${t.audio_file}" type="audio/mpeg">
+              </audio>
+            </div>
+          `).join('');
+        }
+
+        const videoEl = document.getElementById('video-container');
+        if (media.videos && media.videos.length > 0) {
+          videoEl.innerHTML = media.videos.map(v => `
+            <div class="p-4 bg-brand-card border border-neutral-200 rounded-sm space-y-2">
+              <h4 class="font-serif font-semibold text-neutral-900">${v.title || ''}</h4>
+              <a href="${v.video_url}" target="_blank" class="inline-block text-xs text-brand-gold hover:underline uppercase tracking-wider">
+                Watch Performance &rarr;
+              </a>
+            </div>
+          `).join('');
+        }
+      }
+
+      // 6. Gallery (Swiper Carousel)
+      const gallery = await fetchJSON('/content/gallery.json');
+      const galleryWrapper = document.getElementById('gallery-wrapper');
+      if (gallery && gallery.photos && gallery.photos.length > 0) {
+        galleryWrapper.innerHTML = gallery.photos.map(p => `
+          <div class="swiper-slide relative">
+            <img src="${p.image}" alt="${p.caption || 'Yuliia Zasimova'}" class="w-full h-[550px] object-cover" />
+            ${p.caption ? `<div class="absolute bottom-0 inset-x-0 p-4 bg-black/60 text-white text-center text-xs tracking-wider backdrop-blur-sm">${p.caption}</div>` : ''}
+          </div>
+        `).join('');
+
+        new Swiper('.gallery-slider', {
+          loop: true,
+          autoplay: { delay: 4000, disableOnInteraction: false },
+          navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+          pagination: { el: '.swiper-pagination', clickable: true }
         });
+      } else {
+        galleryWrapper.innerHTML = '<div class="swiper-slide py-20 text-center text-neutral-400">Add photos in CMS Gallery section.</div>';
+      }
+
+      // 7. Press
+      const press = await fetchJSON('/content/press.json');
+      const pressEl = document.getElementById('press-container');
+      if (press && press.reviews && press.reviews.length > 0) {
+        pressEl.innerHTML = press.reviews.map(pr => `
+          <blockquote class="p-8 bg-brand-card border-l-2 border-brand-gold text-neutral-800 space-y-3 rounded-r-sm">
+            <p class="text-lg font-serif italic">"${pr.quote || ''}"</p>
+            <footer class="text-xs uppercase tracking-widest text-neutral-500 font-semibold">
+              — ${pr.source || ''} ${pr.author ? `(${pr.author})` : ''}
+            </footer>
+          </blockquote>
+        `).join('');
+      } else {
+        pressEl.innerHTML = '<div class="text-center text-neutral-400 py-6">No press reviews added yet.</div>';
+      }
+
+      // 8. Contacts & Social Links
+      const contacts = await fetchJSON('/content/contacts.json');
+      if (contacts) {
+        if (contacts.email) document.getElementById('contact-email').innerText = contacts.email;
+        if (contacts.phone) document.getElementById('contact-phone').innerText = contacts.phone;
+        if (contacts.agency) document.getElementById('contact-agency').innerText = contacts.agency;
+        if (contacts.location) document.getElementById('contact-location').innerText = contacts.location;
+
+        const setSocial = (id, url) => {
+          if (url) {
+            const el = document.getElementById(id);
+            el.href = url;
+            el.classList.remove('hidden');
+          }
+        };
+
+        setSocial('link-instagram', contacts.instagram);
+        setSocial('link-facebook', contacts.facebook);
+        setSocial('link-youtube', contacts.youtube);
+        setSocial('link-spotify', contacts.spotify);
+        setSocial('link-operabase', contacts.operabase);
       }
     });
-  }
-</script>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yuliia Zasimova | Opera Soprano</title>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        porcelain: '#fdfbf7',
-                        sand: '#f5f0e6',
-                        champagne: '#c59b27',
-                        champagneLight: '#e6c86e',
-                        espresso: '#1a1715',
-                        taupe: '#7a7268',
-                        lightTaupe: '#e8e3dc',
-                    },
-                    fontFamily: {
-                        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
         }
-    </script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        body {
-            background-color: #fdfbf7;
-            color: #1a1715;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4, .font-serif-custom {
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        /* Gold gradient text & borders */
-        .text-gold-gradient {
-            background: linear-gradient(135deg, #b88a1e 0%, #d8b14a 50%, #a07616 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .bg-gold-gradient {
-            background: linear-gradient(135deg, #c59b27 0%, #e1bd58 50%, #a88118 100%);
-        }
-
-        .border-gold-subtle {
-            border-color: rgba(197, 155, 39, 0.3);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f5f0e6;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #c59b27;
-            border-radius: 4px;
-        }
-
-        /* Editorial card shadow */
-        .editorial-shadow {
-            box-shadow: 0 10px 30px -10px rgba(26, 23, 21, 0.05);
-        }
-
-        .editorial-shadow-hover {
-            transition: all 0.4s ease;
-        }
-        .editorial-shadow-hover:hover {
-            box-shadow: 0 20px 40px -15px rgba(197, 155, 39, 0.15);
-            transform: translateY(-3px);
-        }
-
-        /* Lightbox transitions */
-        .modal-active {
-            display: flex !important;
-            animation: fadeIn 0.3s forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Drop cap editorial */
-        .drop-cap::first-letter {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.8rem;
-            float: left;
-            line-height: 0.8;
-            padding-right: 0.75rem;
-            color: #c59b27;
-            font-weight: 700;
-        }
-    </style>
-</head>
-<body class="antialiased selection:bg-champagne selection:text-white">
-
-    <!-- NAVIGATION BAR -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-porcelain/90 backdrop-blur-md border-b border-lightTaupe/60 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#" class="flex flex-col group">
-                <span class="font-serif text-2xl lg:text-3xl font-bold tracking-widest text-espresso uppercase group-hover:text-champagne transition-colors">YULIIA ZASIMOVA</span>
-                <span class="text-xs uppercase tracking-[0.3em] text-taupe font-medium -mt-1">SOPRANO</span>
-            </a>
-
-            <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-widest font-medium text-espresso/80">
-                <a href="#about" class="hover:text-champagne transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-champagne hover:after:w-full after:transition-all" data-i18n="nav.about">Biography</a>
-                <a href="#schedule" class="hover:text-champagne transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-champagne hover:after:w-full after:transition-all" data-i18n="nav.schedule">Schedule</a>
-                <a href="#repertoire" class="hover:text-champagne transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-champagne hover:after:w-full after:transition-all" data-i18n="nav.repertoire">Repertoire</a>
-                <a href="#audio" class="hover:text-champagne transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-champagne hover:after:w-full after:transition-all" data-i18n="nav.audio">Listen</a>
-                <a href="#gallery" class="hover:text-champagne transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-champagne hover:after:w-full after:transition-all" data-i18n="nav.gallery">Gallery</a>
-                <a href="#epk" class="hover:text-champagne transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-champagne hover:after:w-full after:transition-all" data-i18n="nav.epk">Press Kit</a>
-                <a href="#contact" class="hover:text-champagne transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-champagne hover:after:w-full after:transition-all" data-i18n="nav.contact">Booking</a>
-            </nav>
-
-            <!-- Multilingual UA/EN Switcher & Mobile Toggle -->
-            <div class="flex items-center space-x-4">
-                <!-- Language Switcher -->
-                <div class="inline-flex items-center p-1 bg-sand/80 rounded-full border border-lightTaupe text-xs font-semibold uppercase tracking-wider">
-                    <button id="lang-en" class="px-3 py-1 rounded-full transition-all duration-300 text-white bg-espresso shadow-sm" onclick="setLanguage('en')">EN</button>
-                    <button id="lang-ua" class="px-3 py-1 rounded-full transition-all duration-300 text-espresso hover:text-champagne" onclick="setLanguage('ua')">UA</button>
-                </div>
-
-                <!-- CTA Button Desktop -->
-                <a href="#contact" class="hidden lg:inline-block px-5 py-2.5 text-xs uppercase tracking-widest font-semibold border border-champagne text-espresso hover:bg-champagne hover:text-white transition-all rounded-none" data-i18n="nav.book">
-                    Inquire
-                </a>
-
-                <!-- Mobile Menu Toggle Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-espresso text-2xl focus:outline-none p-2" aria-label="Toggle Menu">
-                    <i class="fa-solid fa-bars-staggered"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Drawer Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-porcelain border-b border-lightTaupe px-8 py-6 space-y-4 text-sm font-medium uppercase tracking-widest">
-            <a href="#about" class="block py-2 text-espresso hover:text-champagne" onclick="toggleMobileMenu()" data-i18n="nav.about">Biography</a>
-            <a href="#schedule" class="block py-2 text-espresso hover:text-champagne" onclick="toggleMobileMenu()" data-i18n="nav.schedule">Schedule</a>
-            <a href="#repertoire" class="block py-2 text-espresso hover:text-champagne" onclick="toggleMobileMenu()" data-i18n="nav.repertoire">Repertoire</a>
-            <a href="#audio" class="block py-2 text-espresso hover:text-champagne" onclick="toggleMobileMenu()" data-i18n="nav.audio">Listen</a>
-            <a href="#gallery" class="block py-2 text-espresso hover:text-champagne" onclick="toggleMobileMenu()" data-i18n="nav.gallery">Gallery</a>
-            <a href="#epk" class="block py-2 text-espresso hover:text-champagne" onclick="toggleMobileMenu()" data-i18n="nav.epk">Press Kit</a>
-            <a href="#contact" class="block py-2 text-espresso hover:text-champagne" onclick="toggleMobileMenu()" data-i18n="nav.contact">Booking</a>
-        </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section class="relative min-h-screen pt-28 pb-16 flex items-center justify-center bg-gradient-to-b from-porcelain via-sand/40 to-porcelain overflow-hidden">
-        <!-- Subtle Background Decorative Ring -->
-        <div class="absolute -top-40 -right-40 w-[600px] h-[600px] border border-champagne/15 rounded-full pointer-events-none"></div>
-        <div class="absolute bottom-10 -left-20 w-[450px] h-[450px] border border-champagne/10 rounded-full pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-                
-                <!-- Left Editorial Text Content -->
-                <div class="lg:col-span-7 space-y-8 text-left z-10">
-                    <div class="inline-flex items-center space-x-3 bg-white/80 border border-champagne/30 px-4 py-1.5 rounded-full text-xs uppercase tracking-widest text-espresso shadow-xs">
-                        <span class="w-2 h-2 rounded-full bg-champagne animate-pulse"></span>
-                        <span data-i18n="hero.subtitle">International Opera Soprano</span>
-                    </div>
-
-                    <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light text-espresso leading-[0.95] tracking-tight">
-                        <span class="block italic font-normal text-champagne" data-i18n="hero.title1">Luminous</span>
-                        <span class="block font-bold" data-i18n="hero.title2">Vocal Precision</span>
-                    </h1>
-
-                    <p class="text-taupe text-base sm:text-lg lg:text-xl font-light max-w-2xl leading-relaxed" data-i18n="hero.bio_summary">
-                        Celebrated for her sparkling coloratura agility and profound emotional lyricism. Winner of the 1st Prize at the International Juan Pons Competition and alumna of the prestigious Zurich Opera Studio.
-                    </p>
-
-                    <!-- Award Badges Ribbon -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                        <div class="bg-white/90 p-4 border border-lightTaupe rounded-none border-l-2 border-l-champagne editorial-shadow">
-                            <span class="block text-champagne font-serif text-2xl font-bold">1st Prize</span>
-                            <span class="text-xs uppercase tracking-wider text-taupe" data-i18n="hero.badge1">Juan Pons Singing Competition</span>
-                        </div>
-                        <div class="bg-white/90 p-4 border border-lightTaupe rounded-none border-l-2 border-l-champagne editorial-shadow">
-                            <span class="block text-champagne font-serif text-2xl font-bold">Alumna</span>
-                            <span class="text-xs uppercase tracking-wider text-taupe" data-i18n="hero.badge2">International Opera Studio Zürich</span>
-                        </div>
-                        <div class="bg-white/90 p-4 border border-lightTaupe rounded-none border-l-2 border-l-champagne editorial-shadow">
-                            <span class="block text-champagne font-serif text-2xl font-bold">15+ Roles</span>
-                            <span class="text-xs uppercase tracking-wider text-taupe" data-i18n="hero.badge3">Mozart, Verdi & Slavic Masterworks</span>
-                        </div>
-                    </div>
-
-                    <!-- CTA Actions -->
-                    <div class="flex flex-wrap gap-4 pt-4">
-                        <a href="#audio" class="px-8 py-4 bg-espresso text-porcelain text-xs uppercase tracking-widest font-semibold hover:bg-champagne transition-all shadow-md flex items-center space-x-3">
-                            <i class="fa-solid fa-play text-champagne"></i>
-                            <span data-i18n="hero.cta_listen">Listen Audio Studio</span>
-                        </a>
-                        <a href="#schedule" class="px-8 py-4 bg-white border border-espresso text-espresso text-xs uppercase tracking-widest font-semibold hover:bg-sand transition-all">
-                            <span data-i18n="hero.cta_schedule">Performance Calendar</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Right High-Fashion Image Frame -->
-                <div class="lg:col-span-5 relative">
-                    <div class="relative mx-auto max-w-md lg:max-w-none">
-                        <!-- Framing border -->
-                        <div class="absolute -top-4 -left-4 w-full h-full border border-champagne/40 z-0"></div>
-                        <div class="relative z-10 bg-white p-3 shadow-2xl border border-lightTaupe">
-                            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=1000" 
-                                 alt="Yuliia Zasimova Soprano Portrait" 
-                                 class="w-full h-[520px] object-cover object-top filter grayscale contrast-105 hover:grayscale-0 transition-all duration-700">
-                            
-                            <div class="p-4 bg-porcelain mt-2 border-t border-lightTaupe flex justify-between items-center text-xs text-taupe uppercase tracking-widest">
-                                <span>Opernhaus Zürich Studio Alum</span>
-                                <span class="font-serif italic text-champagne text-sm">Pragmatic Elegance</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- PRESS BANNER -->
-    <section class="bg-espresso text-porcelain py-16 border-y border-champagne/30">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <i class="fa-solid fa-quote-left text-champagne/40 text-4xl mb-6"></i>
-            <div id="press-carousel" class="min-h-[120px] flex flex-col justify-center items-center">
-                <p id="press-quote" class="font-serif text-2xl sm:text-3xl lg:text-4xl italic font-light text-porcelain max-w-4xl leading-relaxed">
-                    "Yuliia Zasimova commands the stage with radiant timbre, sublime dynamic nuance, and heart-wrenching theatrical conviction."
-                </p>
-                <div id="press-source" class="mt-6 text-xs uppercase tracking-[0.25em] text-champagne font-semibold">
-                    — Neue Zürcher Zeitung (NZZ), Switzerland
-                </div>
-            </div>
-            <!-- Indicator Dots -->
-            <div class="flex justify-center space-x-2 mt-8">
-                <button onclick="setQuote(0)" class="quote-dot w-3 h-3 rounded-full bg-champagne transition-all" aria-label="Quote 1"></button>
-                <button onclick="setQuote(1)" class="quote-dot w-3 h-3 rounded-full bg-porcelain/30 hover:bg-champagne transition-all" aria-label="Quote 2"></button>
-                <button onclick="setQuote(2)" class="quote-dot w-3 h-3 rounded-full bg-porcelain/30 hover:bg-champagne transition-all" aria-label="Quote 3"></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- BIOGRAPHY SECTION -->
-    <section id="about" class="py-24 bg-porcelain relative">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs uppercase tracking-[0.3em] text-champagne font-semibold block mb-2" data-i18n="bio.section_tag">Artistic Profile</span>
-                <h2 class="font-serif text-4xl sm:text-5xl font-light text-espresso" data-i18n="bio.heading">Biography & Highlights</h2>
-                <div class="w-16 h-0.5 bg-champagne mx-auto mt-4"></div>
-            </div>
-
-            <!-- Tab Navigation Buttons -->
-            <div class="flex justify-center border-b border-lightTaupe mb-12">
-                <button onclick="switchBioTab('short')" id="tab-btn-short" class="bio-tab-btn py-3 px-6 text-xs uppercase tracking-widest font-semibold text-champagne border-b-2 border-champagne transition-all" data-i18n="bio.tab_short">
-                    Short Bio
-                </button>
-                <button onclick="switchBioTab('career')" id="tab-btn-career" class="bio-tab-btn py-3 px-6 text-xs uppercase tracking-widest font-semibold text-taupe hover:text-espresso border-b-2 border-transparent transition-all" data-i18n="bio.tab_career">
-                    Opera Houses & Stages
-                </button>
-                <button onclick="switchBioTab('awards')" id="tab-btn-awards" class="bio-tab-btn py-3 px-6 text-xs uppercase tracking-widest font-semibold text-taupe hover:text-espresso border-b-2 border-transparent transition-all" data-i18n="bio.tab_awards">
-                    Awards & Honors
-                </button>
-            </div>
-
-            <!-- TAB CONTENT 1: Short Bio -->
-            <div id="bio-tab-short" class="bio-content-block grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-5">
-                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=800" alt="Yuliia Zasimova Opera Stage" class="w-full h-[450px] object-cover editorial-shadow border border-lightTaupe">
-                </div>
-                <div class="lg:col-span-7 space-y-6 text-espresso/90 text-base leading-relaxed">
-                    <p class="drop-cap font-serif text-lg leading-relaxed text-espresso" data-i18n="bio.p1">
-                        Ukrainian soprano Yuliia Zasimova has quickly established herself as one of the most compelling young voices on European opera stages. Celebrated for her brilliant coloratura technique, rich lyric warmth, and arresting dramatic presence, she effortlessly spans repertoire from Mozart and Bel Canto to 20th-century opera.
-                    </p>
-                    <p data-i18n="bio.p2">
-                        Her formative years at the prestigious International Opera Studio of Opernhaus Zürich laid the cornerstone for her international career, enabling her to collaborate with world-renowned conductors and directors in major theatrical productions across Switzerland, Germany, France, and Ukraine.
-                    </p>
-                    <div class="pt-4 grid grid-cols-2 gap-6 border-t border-lightTaupe">
-                        <div>
-                            <span class="block text-xs uppercase tracking-wider text-taupe" data-i18n="bio.voice_type_label">Voice Classification</span>
-                            <span class="font-serif text-xl font-bold text-champagne" data-i18n="bio.voice_type_val">Lyric Coloratura Soprano</span>
-                        </div>
-                        <div>
-                            <span class="block text-xs uppercase tracking-wider text-taupe" data-i18n="bio.base_label">Current Residence</span>
-                            <span class="font-serif text-xl font-bold text-espresso" data-i18n="bio.base_val">Zurich, Switzerland / Kyiv</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB CONTENT 2: Career & Houses -->
-            <div id="bio-tab-career" class="bio-content-block hidden space-y-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 border border-lightTaupe editorial-shadow">
-                        <span class="text-champagne text-2xl font-serif font-bold block mb-2">Opernhaus Zürich</span>
-                        <p class="text-xs uppercase tracking-widest text-taupe mb-4">Switzerland</p>
-                        <p class="text-sm text-espresso/80 leading-relaxed" data-i18n="bio.house1_desc">
-                            Member of International Opera Studio. Performed in flagship productions including Mozart's *Die Zauberflöte*, *Rigoletto*, and contemporary lyric premieres.
-                        </p>
-                    </div>
-
-                    <div class="bg-white p-8 border border-lightTaupe editorial-shadow">
-                        <span class="text-champagne text-2xl font-serif font-bold block mb-2">Grand Théâtre de Genève</span>
-                        <p class="text-xs uppercase tracking-widest text-taupe mb-4">Switzerland</p>
-                        <p class="text-sm text-espresso/80 leading-relaxed" data-i18n="bio.house2_desc">
-                            Featured guest appearances in French and Italian operatic masterworks, praised for her vocal sparkle and stylistic authenticity.
-                        </p>
-                    </div>
-
-                    <div class="bg-white p-8 border border-lightTaupe editorial-shadow">
-                        <span class="text-champagne text-2xl font-serif font-bold block mb-2">National Opera of Ukraine</span>
-                        <p class="text-xs uppercase tracking-widest text-taupe mb-4">Kyiv, Ukraine</p>
-                        <p class="text-sm text-espresso/80 leading-relaxed" data-i18n="bio.house3_desc">
-                            Principal guest artist appearing in Violetta (*La Traviata*), Pamina (*Die Zauberflöte*), and Ukrainian symphonic gala concerts.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB CONTENT 3: Awards -->
-            <div id="bio-tab-awards" class="bio-content-block hidden space-y-6">
-                <div class="max-w-4xl mx-auto space-y-4">
-                    <div class="bg-white p-6 border-l-4 border-l-champagne border-y border-r border-lightTaupe flex items-center justify-between">
-                        <div>
-                            <h3 class="font-serif text-2xl font-bold text-espresso">1st Prize & Gold Medal</h3>
-                            <p class="text-xs uppercase tracking-wider text-taupe">International Juan Pons Singing Competition</p>
-                        </div>
-                        <span class="font-serif text-xl font-bold text-champagne">Spain</span>
-                    </div>
-
-                    <div class="bg-white p-6 border-l-4 border-l-champagne border-y border-r border-lightTaupe flex items-center justify-between">
-                        <div>
-                            <h3 class="font-serif text-2xl font-bold text-espresso">Finalist & Special Opera Award</h3>
-                            <p class="text-xs uppercase tracking-wider text-taupe">International Vocal Competition 'S-Hertogenbosch</p>
-                        </div>
-                        <span class="font-serif text-xl font-bold text-champagne">Netherlands</span>
-                    </div>
-
-                    <div class="bg-white p-6 border-l-4 border-l-champagne border-y border-r border-lightTaupe flex items-center justify-between">
-                        <div>
-                            <h3 class="font-serif text-2xl font-bold text-espresso">Grand Prix Recipient</h3>
-                            <p class="text-xs uppercase tracking-wider text-taupe">Lysenko International Music Competition</p>
-                        </div>
-                        <span class="font-serif text-xl font-bold text-champagne">Ukraine</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- REPERTOIRE SECTION -->
-    <section id="repertoire" class="py-24 bg-sand/30 border-t border-lightTaupe">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-                <div>
-                    <span class="text-xs uppercase tracking-[0.3em] text-champagne font-semibold block mb-2" data-i18n="rep.section_tag">Vocal Roles</span>
-                    <h2 class="font-serif text-4xl sm:text-5xl font-light text-espresso" data-i18n="rep.heading">Operatic Repertoire</h2>
-                </div>
-                
-                <!-- Search & Filters -->
-                <div class="mt-6 md:mt-0 flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
-                    <!-- Search Input -->
-                    <div class="relative">
-                        <input type="text" id="rep-search" oninput="filterRepertoire()" placeholder="Search role or opera..." class="bg-white text-espresso text-xs border border-lightTaupe px-4 py-2.5 pl-9 w-full sm:w-64 focus:outline-none focus:border-champagne">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-taupe text-xs"></i>
-                    </div>
-
-                    <!-- Category Filter Pills -->
-                    <div class="inline-flex bg-white p-1 border border-lightTaupe rounded-none text-xs uppercase font-medium">
-                        <button onclick="setRepFilter('all')" class="rep-filter-btn px-3 py-1.5 bg-espresso text-white" data-filter="all">All</button>
-                        <button onclick="setRepFilter('Mozart')" class="rep-filter-btn px-3 py-1.5 text-taupe hover:text-espresso" data-filter="Mozart">Mozart</button>
-                        <button onclick="setRepFilter('Verdi')" class="rep-filter-btn px-3 py-1.5 text-taupe hover:text-espresso" data-filter="Verdi">Verdi</button>
-                        <button onclick="setRepFilter('Slavic')" class="rep-filter-btn px-3 py-1.5 text-taupe hover:text-espresso" data-filter="Slavic">Slavic</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Repertoire Table -->
-            <div class="bg-white border border-lightTaupe editorial-shadow overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-porcelain border-b border-lightTaupe text-xs uppercase tracking-widest text-taupe font-semibold">
-                            <th class="p-4 sm:p-6">Role</th>
-                            <th class="p-4 sm:p-6">Opera Title</th>
-                            <th class="p-4 sm:p-6">Composer</th>
-                            <th class="p-4 sm:p-6">Language</th>
-                            <th class="p-4 sm:p-6 text-right">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="repertoire-tbody" class="divide-y divide-lightTaupe text-sm">
-                        <!-- Populated via JS -->
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- PERFORMANCE SCHEDULE SECTION -->
-    <section id="schedule" class="py-24 bg-porcelain">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs uppercase tracking-[0.3em] text-champagne font-semibold block mb-2" data-i18n="sched.section_tag">Season Calendar</span>
-                <h2 class="font-serif text-4xl sm:text-5xl font-light text-espresso" data-i18n="sched.heading">Upcoming Performances</h2>
-                <div class="w-16 h-0.5 bg-champagne mx-auto mt-4"></div>
-            </div>
-
-            <div class="space-y-6 max-w-5xl mx-auto" id="schedule-container">
-                <!-- Schedule items populated dynamically -->
-            </div>
-
-        </div>
-    </section>
-
-    <!-- AUDIO STUDIO & CANVAS VISUALIZER -->
-    <section id="audio" class="py-24 bg-espresso text-porcelain relative overflow-hidden">
-        <!-- Canvas Ambient Visualizer -->
-        <div class="absolute inset-0 opacity-25 pointer-events-none">
-            <canvas id="audio-canvas" class="w-full h-full"></canvas>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="text-xs uppercase tracking-[0.3em] text-champagne font-semibold block mb-2" data-i18n="audio.section_tag">Acoustic Samples</span>
-                <h2 class="font-serif text-4xl sm:text-5xl font-light text-porcelain" data-i18n="audio.heading">Interactive Vocal Studio</h2>
-                <p class="text-taupe text-sm mt-3" data-i18n="audio.sub">Experience synthesized opera tone profiles or listen to excerpt recordings using real-time Web Audio API visualization.</p>
-            </div>
-
-            <div class="bg-porcelain/5 border border-champagne/30 backdrop-blur-md p-8 lg:p-12 editorial-shadow max-w-4xl mx-auto">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    
-                    <!-- Track Selection & Controls -->
-                    <div class="lg:col-span-7 space-y-6">
-                        <div>
-                            <label class="block text-xs uppercase tracking-widest text-champagne mb-2" data-i18n="audio.select_aria">Select Vocal Excerpt</label>
-                            <select id="aria-select" onchange="loadAriaTrack()" class="w-full bg-espresso border border-champagne/40 text-porcelain p-3 text-sm focus:outline-none focus:border-champagne">
-                                <option value="1">Mozart: "Ach, ich fühl's" (Pamina - Die Zauberflöte)</option>
-                                <option value="2">Verdi: "Sempre Libera" (Violetta - La Traviata)</option>
-                                <option value="3">Gluck: "O del mio dolce ardor" (Paride ed Elena)</option>
-                                <option value="4">Dvořák: "Song to the Moon" (Rusalka)</option>
-                            </select>
-                        </div>
-
-                        <!-- Audio Customizer Sliders -->
-                        <div class="grid grid-cols-2 gap-4 pt-2">
-                            <div>
-                                <span class="block text-xs uppercase tracking-wider text-taupe mb-1" data-i18n="audio.vibrato">Vibrato Rate</span>
-                                <input type="range" id="vibrato-rate" min="3" max="8" step="0.5" value="5.5" class="w-full accent-champagne">
-                            </div>
-                            <div>
-                                <span class="block text-xs uppercase tracking-wider text-taupe mb-1" data-i18n="audio.reverb">Hall Reverb</span>
-                                <input type="range" id="reverb-depth" min="0" max="1" step="0.1" value="0.7" class="w-full accent-champagne">
-                            </div>
-                        </div>
-
-                        <!-- Action Controls -->
-                        <div class="flex items-center space-x-4 pt-4">
-                            <button id="play-synth-btn" onclick="toggleAudioSynthesizer()" class="px-8 py-3.5 bg-champagne text-espresso text-xs uppercase tracking-widest font-bold hover:bg-champagneLight transition-all flex items-center space-x-3">
-                                <i id="play-icon" class="fa-solid fa-play"></i>
-                                <span id="play-text" data-i18n="audio.play_btn">Play Vocal Tone Synthesis</span>
-                            </button>
-                            <button onclick="stopAudioSynthesizer()" class="px-5 py-3.5 border border-porcelain/30 text-porcelain text-xs uppercase tracking-widest hover:border-champagne hover:text-champagne transition-all">
-                                Stop
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Visualizer Wave Representation Card -->
-                    <div class="lg:col-span-5 bg-espresso/80 border border-champagne/20 p-6 text-center flex flex-col justify-center items-center h-full min-h-[200px]">
-                        <div class="w-16 h-16 rounded-full border-2 border-champagne/50 flex items-center justify-center mb-4 text-champagne text-xl">
-                            <i class="fa-solid fa-wave-square animate-pulse"></i>
-                        </div>
-                        <span class="text-xs uppercase tracking-widest text-champagne block mb-1">Frequency Resonance</span>
-                        <p class="text-xs text-taupe" id="audio-status-text" data-i18n="audio.ready">Engine ready. Press play to start live canvas visualizer.</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- STAGE GALLERY & LIGHTBOX -->
-    <section id="gallery" class="py-24 bg-porcelain">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs uppercase tracking-[0.3em] text-champagne font-semibold block mb-2" data-i18n="gal.section_tag">Visual Archive</span>
-                <h2 class="font-serif text-4xl sm:text-5xl font-light text-espresso" data-i18n="gal.heading">Stage & Editorial Photography</h2>
-                <div class="w-16 h-0.5 bg-champagne mx-auto mt-4"></div>
-            </div>
-
-            <!-- Gallery Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-grid">
-                <!-- Items dynamically generated -->
-            </div>
-
-        </div>
-    </section>
-
-    <!-- LIGHTBOX MODAL -->
-    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-espresso/95 hidden items-center justify-center p-4">
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-porcelain hover:text-champagne text-3xl focus:outline-none">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-        <div class="max-w-4xl w-full text-center space-y-4">
-            <img id="lightbox-img" src="" alt="Opera Stage Photo" class="max-h-[75vh] mx-auto object-contain border border-champagne/30">
-            <h4 id="lightbox-title" class="font-serif text-2xl text-porcelain"></h4>
-            <p id="lightbox-caption" class="text-xs uppercase tracking-widest text-champagne"></p>
-        </div>
-    </div>
-
-    <!-- ELECTRONIC PRESS KIT (EPK) -->
-    <section id="epk" class="py-24 bg-sand/20 border-t border-lightTaupe">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs uppercase tracking-[0.3em] text-champagne font-semibold block mb-2" data-i18n="epk.section_tag">Media Resources</span>
-                <h2 class="font-serif text-4xl sm:text-5xl font-light text-espresso" data-i18n="epk.heading">Electronic Press Kit (EPK)</h2>
-                <div class="w-16 h-0.5 bg-champagne mx-auto mt-4"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-white p-8 border border-lightTaupe editorial-shadow-hover flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-sand flex items-center justify-center text-champagne text-xl mb-6">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <h3 class="font-serif text-2xl font-bold text-espresso mb-2" data-i18n="epk.card1_title">Official Biography</h3>
-                        <p class="text-xs text-taupe leading-relaxed mb-6" data-i18n="epk.card1_desc">Complete career biography in High-Res PDF (English & Ukrainian versions).</p>
-                    </div>
-                    <button onclick="triggerDownload('Yuliia_Zasimova_Biography.pdf')" class="w-full py-3 bg-espresso text-porcelain text-xs uppercase tracking-widest font-semibold hover:bg-champagne transition-all flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-download"></i>
-                        <span data-i18n="epk.download">Download PDF</span>
-                    </button>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-white p-8 border border-lightTaupe editorial-shadow-hover flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-sand flex items-center justify-center text-champagne text-xl mb-6">
-                            <i class="fa-solid fa-image"></i>
-                        </div>
-                        <h3 class="font-serif text-2xl font-bold text-espresso mb-2" data-i18n="epk.card2_title">Press Portraits Pack</h3>
-                        <p class="text-xs text-taupe leading-relaxed mb-6" data-i18n="epk.card2_desc">High-resolution 300DPI stage and editorial portrait photographs with royalty credits.</p>
-                    </div>
-                    <button onclick="triggerDownload('Yuliia_Zasimova_Portraits_300DPI.zip')" class="w-full py-3 bg-espresso text-porcelain text-xs uppercase tracking-widest font-semibold hover:bg-champagne transition-all flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-file-zipper"></i>
-                        <span data-i18n="epk.download_zip">Download ZIP (45MB)</span>
-                    </button>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-white p-8 border border-lightTaupe editorial-shadow-hover flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-sand flex items-center justify-center text-champagne text-xl mb-6">
-                            <i class="fa-solid fa-music"></i>
-                        </div>
-                        <h3 class="font-serif text-2xl font-bold text-espresso mb-2" data-i18n="epk.card3_title">Repertoire & Tech Rider</h3>
-                        <p class="text-xs text-taupe leading-relaxed mb-6" data-i18n="epk.card3_desc">Detailed operatic role list, orchestra specifications, and concert program options.</p>
-                    </div>
-                    <button onclick="triggerDownload('Yuliia_Zasimova_Repertoire_Rider.pdf')" class="w-full py-3 bg-espresso text-porcelain text-xs uppercase tracking-widest font-semibold hover:bg-champagne transition-all flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-download"></i>
-                        <span data-i18n="epk.download">Download PDF</span>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- CONTACT & BOOKING SECTION -->
-    <section id="contact" class="py-24 bg-porcelain">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                
-                <!-- Management Details -->
-                <div class="lg:col-span-5 space-y-8">
-                    <div>
-                        <span class="text-xs uppercase tracking-[0.3em] text-champagne font-semibold block mb-2" data-i18n="contact.tag">Inquiries</span>
-                        <h2 class="font-serif text-4xl sm:text-5xl font-light text-espresso" data-i18n="contact.heading">General & Operatic Management</h2>
-                    </div>
-
-                    <p class="text-taupe text-sm leading-relaxed" data-i18n="contact.sub">
-                        For opera house engagements, concert bookings, masterclasses, and press interview requests, please contact management or fill out the direct inquiry form.
-                    </p>
-
-                    <div class="space-y-6 pt-4 border-t border-lightTaupe">
-                        <div>
-                            <span class="block text-xs uppercase tracking-wider text-taupe" data-i18n="contact.mgmt_label">General Management</span>
-                            <span class="font-serif text-xl font-bold text-espresso">International Opera Artists Agency</span>
-                            <p class="text-sm text-taupe">Zurich & Vienna</p>
-                        </div>
-
-                        <div>
-                            <span class="block text-xs uppercase tracking-wider text-taupe">Email Inquiry</span>
-                            <a href="mailto:management@zasimova-soprano.com" class="font-serif text-xl font-bold text-champagne hover:underline">management@zasimova-soprano.com</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Form -->
-                <div class="lg:col-span-7 bg-white p-8 lg:p-12 border border-lightTaupe editorial-shadow">
-                    <form id="booking-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-xs uppercase tracking-wider text-taupe mb-2" data-i18n="form.name">Your Name *</label>
-                                <input type="text" required class="w-full bg-porcelain border border-lightTaupe px-4 py-3 text-sm focus:outline-none focus:border-champagne">
-                            </div>
-                            <div>
-                                <label class="block text-xs uppercase tracking-wider text-taupe mb-2" data-i18n="form.email">Email Address *</label>
-                                <input type="email" required class="w-full bg-porcelain border border-lightTaupe px-4 py-3 text-sm focus:outline-none focus:border-champagne">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-xs uppercase tracking-wider text-taupe mb-2" data-i18n="form.organization">Opera House / Organization</label>
-                                <input type="text" class="w-full bg-porcelain border border-lightTaupe px-4 py-3 text-sm focus:outline-none focus:border-champagne">
-                            </div>
-                            <div>
-                                <label class="block text-xs uppercase tracking-wider text-taupe mb-2" data-i18n="form.type">Engagement Type</label>
-                                <select class="w-full bg-porcelain border border-lightTaupe px-4 py-3 text-sm focus:outline-none focus:border-champagne">
-                                    <option value="opera">Opera Production</option>
-                                    <option value="concert">Concert / Gala</option>
-                                    <option value="recital">Solo Recital</option>
-                                    <option value="press">Press & Media</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs uppercase tracking-wider text-taupe mb-2" data-i18n="form.message">Inquiry Details *</label>
-                            <textarea rows="5" required class="w-full bg-porcelain border border-lightTaupe p-4 text-sm focus:outline-none focus:border-champagne" placeholder="Please mention proposed dates, roles, venue details..."></textarea>
-                        </div>
-
-                        <button type="submit" class="w-full py-4 bg-espresso text-porcelain text-xs uppercase tracking-widest font-semibold hover:bg-champagne transition-all shadow-md">
-                            <span data-i18n="form.submit">Send Booking Inquiry</span>
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-espresso text-porcelain py-12 border-t border-champagne/20">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-            <div>
-                <span class="font-serif text-2xl font-bold tracking-widest uppercase">YULIIA ZASIMOVA</span>
-                <p class="text-xs text-taupe mt-1">© 2026 Yuliia Zasimova. All Rights Reserved.</p>
-            </div>
-
-            <!-- Social Links -->
-            <div class="flex space-x-6 text-lg text-champagne">
-                <a href="#" class="hover:text-porcelain transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" class="hover:text-porcelain transition-colors" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="#" class="hover:text-porcelain transition-colors" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#" class="hover:text-porcelain transition-colors" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- TOAST NOTIFICATION BOX -->
-    <div id="toast" class="fixed bottom-8 right-8 z-50 bg-espresso text-porcelain border border-champagne p-4 shadow-xl text-xs uppercase tracking-wider hidden transition-all">
-        <span id="toast-msg">Action completed.</span>
-    </div>
-
-    <script>
-        let currentLang = 'en';
-
-        // Translation Dictionary
-        const i18n = {
-            en: {
-                "nav.about": "Biography",
-                "nav.schedule": "Schedule",
-                "nav.repertoire": "Repertoire",
-                "nav.audio": "Listen",
-                "nav.gallery": "Gallery",
-                "nav.epk": "Press Kit",
-                "nav.contact": "Booking",
-                "nav.book": "Inquire",
-
-                "hero.subtitle": "International Opera Soprano",
-                "hero.title1": "Luminous",
-                "hero.title2": "Vocal Precision",
-                "hero.bio_summary": "Celebrated for her sparkling coloratura agility and profound emotional lyricism. Winner of the 1st Prize at the International Juan Pons Competition and alumna of the Zurich Opera Studio.",
-                "hero.badge1": "Juan Pons Competition Winner",
-                "hero.badge2": "Zurich Opera Studio Alum",
-                "hero.badge3": "Mozart & Verdi Roles",
-                "hero.cta_listen": "Listen Audio Studio",
-                "hero.cta_schedule": "Performance Calendar",
-
-                "bio.section_tag": "Artistic Profile",
-                "bio.heading": "Biography & Highlights",
-                "bio.tab_short": "Short Bio",
-                "bio.tab_career": "Opera Houses & Stages",
-                "bio.tab_awards": "Awards & Honors",
-                "bio.p1": "Ukrainian soprano Yuliia Zasimova has quickly established herself as one of the most compelling young voices on European opera stages. Celebrated for her brilliant coloratura technique, rich lyric warmth, and arresting dramatic presence, she effortlessly spans repertoire from Mozart and Bel Canto to 20th-century opera.",
-                "bio.p2": "Her formative years at the prestigious International Opera Studio of Opernhaus Zürich laid the cornerstone for her international career, enabling her to collaborate with world-renowned conductors and directors in major theatrical productions across Switzerland, Germany, France, and Ukraine.",
-                "bio.voice_type_label": "Voice Classification",
-                "bio.voice_type_val": "Lyric Coloratura Soprano",
-                "bio.base_label": "Current Residence",
-                "bio.base_val": "Zurich, Switzerland / Kyiv",
-                "bio.house1_desc": "Member of International Opera Studio. Performed in flagship productions including Mozart's Die Zauberflöte and Verdi's Rigoletto.",
-                "bio.house2_desc": "Featured guest appearances in French and Italian operatic masterworks, praised for her vocal sparkle and stylistic authenticity.",
-                "bio.house3_desc": "Principal guest artist appearing in Violetta (La Traviata), Pamina (Die Zauberflöte), and Ukrainian symphonic gala concerts.",
-
-                "rep.section_tag": "Vocal Roles",
-                "rep.heading": "Operatic Repertoire",
-                "sched.section_tag": "Season Calendar",
-                "sched.heading": "Upcoming Performances",
-                
-                "audio.section_tag": "Acoustic Samples",
-                "audio.heading": "Interactive Vocal Studio",
-                "audio.sub": "Experience synthesized opera tone profiles or listen to excerpt recordings using real-time Web Audio API visualization.",
-                "audio.select_aria": "Select Vocal Excerpt",
-                "audio.vibrato": "Vibrato Rate",
-                "audio.reverb": "Hall Reverb",
-                "audio.play_btn": "Play Vocal Tone Synthesis",
-                "audio.ready": "Engine ready. Press play to start live canvas visualizer.",
-
-                "gal.section_tag": "Visual Archive",
-                "gal.heading": "Stage & Editorial Photography",
-                
-                "epk.section_tag": "Media Resources",
-                "epk.heading": "Electronic Press Kit (EPK)",
-                "epk.card1_title": "Official Biography",
-                "epk.card1_desc": "Complete career biography in High-Res PDF (English & Ukrainian versions).",
-                "epk.card2_title": "Press Portraits Pack",
-                "epk.card2_desc": "High-resolution 300DPI stage and editorial portrait photographs with royalty credits.",
-                "epk.card3_title": "Repertoire & Tech Rider",
-                "epk.card3_desc": "Detailed operatic role list, orchestra specifications, and concert program options.",
-                "epk.download": "Download PDF",
-                "epk.download_zip": "Download ZIP (45MB)",
-
-                "contact.tag": "Inquiries",
-                "contact.heading": "General & Operatic Management",
-                "contact.sub": "For opera house engagements, concert bookings, masterclasses, and press interview requests, please contact management or fill out the direct inquiry form.",
-                "contact.mgmt_label": "General Management",
-
-                "form.name": "Your Name *",
-                "form.email": "Email Address *",
-                "form.organization": "Opera House / Organization",
-                "form.type": "Engagement Type",
-                "form.message": "Inquiry Details *",
-                "form.submit": "Send Booking Inquiry"
-            },
-            ua: {
-                "nav.about": "Біографія",
-                "nav.schedule": "Афіша",
-                "nav.repertoire": "Репертуар",
-                "nav.audio": "Аудіо",
-                "nav.gallery": "Галерея",
-                "nav.epk": "Прес-кіт",
-                "nav.contact": "Букінг",
-                "nav.book": "Запит",
-
-                "hero.subtitle": "Міжнародна Оперна Сопрано",
-                "hero.title1": "Витончена",
-                "hero.title2": "Вокальна Майстерність",
-                "hero.bio_summary": "Відома своєю блискучою колоратурною технікою та глибоким ліризмом. Переможниця 1-ї премії Міжнародного конкурсу Хуана Понса, випускниця Оперної студії Цюриха.",
-                "hero.badge1": "1-ша Премія Конкурсу Х. Понса",
-                "hero.badge2": "Випускниця Оперної Студії Цюриха",
-                "hero.badge3": "Провідні Партії Моцарта і Верді",
-                "hero.cta_listen": "Слухати Аудіостудію",
-                "hero.cta_schedule": "Календар Виступів",
-
-                "bio.section_tag": "Артистичний Профіль",
-                "bio.heading": "Біографія та Здобутки",
-                "bio.tab_short": "Коротка Біографія",
-                "bio.tab_career": "Оперні Театри",
-                "bio.tab_awards": "Нагороди та Конкурси",
-                "bio.p1": "Українське сопрано Юлія Засімова стрімко завоювала визнання на провідних оперних сценах Європи. Відома своєю витонченою колоратурною майстерністю, багатим ліричним тембром та яскравою сценічною виразністю, вона органічно виконує репертуар від Моцарта і Бельканто до опера 20 століття.",
-                "bio.p2": "Роки навчання в Міжнародній оперній студії Opernhaus Zürich заклали міцний фундамент для її міжнародної кар'єри, дозволивши співпрацювати з видатними диригентами та режисерами у Швейцарії, Німеччині, Франції та Україні.",
-                "bio.voice_type_label": "Тип Голосу",
-                "bio.voice_type_val": "Лірико-колоратурне Сопрано",
-                "bio.base_label": "Місце Проживання",
-                "bio.base_val": "Цюрих, Швейцарія / Київ",
-                "bio.house1_desc": "Учасниця Міжнародної оперної студії. Виступала у виставах 'Чарівна флейта' Моцарта та 'Ріголетто' Верді.",
-                "bio.house2_desc": "Запрошена солістка у французьких та італійських оперних шедеврах, високо оцінена критикою за тембральний блиск.",
-                "bio.house3_desc": "Запрошена солістка: партії Віолетти ('Травіата'), Паміни ('Чарівна флейта') та сифмонічні гала-концерти.",
-
-                "rep.section_tag": "Оперні Партії",
-                "rep.heading": "Репертуарний Список",
-                "sched.section_tag": "Календар Сезону",
-                "sched.heading": "Найближчі Виступи",
-
-                "audio.section_tag": "Акустичні Зразки",
-                "audio.heading": "Інтерактивна Вокальна Студія",
-                "audio.sub": "Прослухайте синтезований вокальний тембр або арії із застосуванням візуалізатора Web Audio API.",
-                "audio.select_aria": "Оберіть Вокальний Уривок",
-                "audio.vibrato": "Частота Вібрато",
-                "audio.reverb": "Реверберація Залу",
-                "audio.play_btn": "Запустити Синтез Голосу",
-                "audio.ready": "Студія готова. Натисніть play для візуалізації.",
-
-                "gal.section_tag": "Візуальний Архів",
-                "gal.heading": "Сценічні та Портретні Фото",
-
-                "epk.section_tag": "Медіа Ресурси",
-                "epk.heading": "Електронний Прес-Кіт (EPK)",
-                "epk.card1_title": "Офіційна Біографія",
-                "epk.card1_desc": "Повна біографія високої якості в форматі PDF (англійською та українською).",
-                "epk.card2_title": "Пакет Портретних Фото",
-                "epk.card2_desc": "Фотографії високої роздільної здатності 300DPI для афіш та друкованої преси.",
-                "epk.card3_title": "Репертуар та Райдер",
-                "epk.card3_desc": "Детальний оперний репертуар, технічний райдер та варіанти концертних програм.",
-                "epk.download": "Завантажити PDF",
-                "epk.download_zip": "Завантажити ZIP (45MB)",
-
-                "contact.tag": "Організація Виступів",
-                "contact.heading": "Менеджмент та Букінг",
-                "contact.sub": "З питань ангажементів в оперних театрах, сольних концертів, майстер-класів та інтерв'ю звертайтеся до менеджменту.",
-                "contact.mgmt_label": "Генеральний Менеджмент",
-
-                "form.name": "Ваше Ім'я *",
-                "form.email": "Email Адреса *",
-                "form.organization": "Театр / Організація",
-                "form.type": "Тип Виступу",
-                "form.message": "Деталі Запиту *",
-                "form.submit": "Надіслати Запит"
-            }
-        };
-
-        // Press Quotes Carousel
-        const pressQuotes = [
-            {
-                quote: "Yuliia Zasimova commands the stage with radiant timbre, sublime dynamic nuance, and heart-wrenching theatrical conviction.",
-                source: "— Neue Zürcher Zeitung (NZZ), Switzerland"
-            },
-            {
-                quote: "A luminous Pamina with an effortless coloratura floating into the hall like warm spun silk.",
-                source: "— Opera Magazine UK"
-            },
-            {
-                quote: "Засімова захоплює глибиною вокального проніковання та філігранною технікою, яка чарує з першої ноти.",
-                source: "— Музика та Театр України"
-            }
-        ];
-        let currentQuoteIndex = 0;
-
-        // Repertoire Data
-        const repertoireData = [
-            { role: "Violetta Valéry", opera: "La Traviata", composer: "Verdi", cat: "Verdi", lang: "Italian", status: "Active Stage" },
-            { role: "Pamina", opera: "Die Zauberflöte", composer: "Mozart", cat: "Mozart", lang: "German", status: "Active Stage" },
-            { role: "Gilda", opera: "Rigoletto", composer: "Verdi", cat: "Verdi", lang: "Italian", status: "Active Stage" },
-            { role: "Zerlina", opera: "Don Giovanni", composer: "Mozart", cat: "Mozart", lang: "Italian", status: "Active Stage" },
-            { role: "Euridice", opera: "Orfeo ed Euridice", composer: "Gluck", cat: "Gluck", lang: "Italian", status: "Active Stage" },
-            { role: "Iolanta", opera: "Iolanta", composer: "Tchaikovsky", cat: "Slavic", lang: "Slavic", status: "Active Stage" },
-            { role: "Marfa", opera: "The Tsar's Bride", composer: "Rimsky-Korsakov", cat: "Slavic", lang: "Slavic", status: "In Preparation" },
-            { role: "Oksana", opera: "Zaporozhets za Dunayem", composer: "Hulak-Artemovsky", cat: "Slavic", lang: "Ukrainian", status: "Active Stage" }
-        ];
-
-        // Performance Schedule Data
-        const scheduleData = [
-            {
-                day: "14",
-                month: "NOV 2026",
-                opera: "Mozart: Die Zauberflöte (Pamina)",
-                venue: "Opernhaus Zürich, Switzerland",
-                status: "On Sale",
-                link: "#"
-            },
-            {
-                day: "02",
-                month: "DEC 2026",
-                opera: "Verdi: La Traviata (Violetta)",
-                venue: "Grand Théâtre de Genève, Switzerland",
-                status: "Selling Fast",
-                link: "#"
-            },
-            {
-                day: "18",
-                month: "JAN 2027",
-                opera: "Gala Recital: Slavic & Bel Canto Masterworks",
-                venue: "National Opera of Ukraine, Kyiv",
-                status: "Announcement Soon",
-                link: "#"
-            }
-        ];
-
-        // Gallery Data
-        const galleryData = [
-            {
-                img: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800",
-                title: "Violetta Valéry",
-                caption: "La Traviata — Grand Stage Production"
-            },
-            {
-                img: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&q=80&w=800",
-                title: "Editorial Studio",
-                caption: "Zurich High-Fashion Portrait"
-            },
-            {
-                img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=800",
-                title: "Pamina",
-                caption: "Die Zauberflöte — Opernhaus Zürich"
-            }
-        ];
-
-        window.onload = function() {
-            renderRepertoire('all');
-            renderSchedule();
-            renderGallery();
-            initCanvasVisualizer();
-            setInterval(rotatePressQuote, 6000);
-        };
-
-        // Multilingual switch engine
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (i18n[lang] && i18n[lang][key]) {
-                    el.textContent = i18n[lang][key];
-                }
-            });
-
-            // Toggle language buttons styling
-            if (lang === 'en') {
-                document.getElementById('lang-en').className = 'px-3 py-1 rounded-full text-white bg-espresso shadow-sm transition-all';
-                document.getElementById('lang-ua').className = 'px-3 py-1 rounded-full text-espresso hover:text-champagne transition-all';
-            } else {
-                document.getElementById('lang-ua').className = 'px-3 py-1 rounded-full text-white bg-espresso shadow-sm transition-all';
-                document.getElementById('lang-en').className = 'px-3 py-1 rounded-full text-espresso hover:text-champagne transition-all';
-            }
-        }
-
-        // Mobile drawer menu toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        // Bio Tab Switcher
-        function switchBioTab(tabKey) {
-            document.querySelectorAll('.bio-tab-btn').forEach(btn => {
-                btn.classList.remove('text-champagne', 'border-champagne');
-                btn.classList.add('text-taupe', 'border-transparent');
-            });
-
-            document.querySelectorAll('.bio-content-block').forEach(block => {
-                block.classList.add('hidden');
-            });
-
-            const activeBtn = document.getElementById(`tab-btn-${tabKey}`);
-            activeBtn.classList.remove('text-taupe', 'border-transparent');
-            activeBtn.classList.add('text-champagne', 'border-champagne');
-
-            document.getElementById(`bio-tab-${tabKey}`).classList.remove('hidden');
-        }
-
-        // Press Quote Carousel
-        function rotatePressQuote() {
-            currentQuoteIndex = (currentQuoteIndex + 1) % pressQuotes.length;
-            setQuote(currentQuoteIndex);
-        }
-
-        function setQuote(idx) {
-            currentQuoteIndex = idx;
-            document.getElementById('press-quote').textContent = `"${pressQuotes[idx].quote}"`;
-            document.getElementById('press-source').textContent = pressQuotes[idx].source;
-
-            document.querySelectorAll('.quote-dot').forEach((dot, i) => {
-                if (i === idx) {
-                    dot.className = "quote-dot w-3 h-3 rounded-full bg-champagne transition-all";
-                } else {
-                    dot.className = "quote-dot w-3 h-3 rounded-full bg-porcelain/30 hover:bg-champagne transition-all";
-                }
-            });
-        }
-
-        let currentFilter = 'all';
-        function setRepFilter(cat) {
-            currentFilter = cat;
-            document.querySelectorAll('.rep-filter-btn').forEach(btn => {
-                if (btn.getAttribute('data-filter') === cat) {
-                    btn.className = "rep-filter-btn px-3 py-1.5 bg-espresso text-white transition-all";
-                } else {
-                    btn.className = "rep-filter-btn px-3 py-1.5 text-taupe hover:text-espresso transition-all";
-                }
-            });
-            filterRepertoire();
-        }
-
-        function filterRepertoire() {
-            const query = document.getElementById('rep-search').value.toLowerCase();
-            const filtered = repertoireData.filter(item => {
-                const matchesCat = (currentFilter === 'all') || (item.cat === currentFilter);
-                const matchesQuery = item.role.toLowerCase().includes(query) || 
-                                     item.opera.toLowerCase().includes(query) || 
-                                     item.composer.toLowerCase().includes(query);
-                return matchesCat && matchesQuery;
-            });
-            renderRepertoireTable(filtered);
-        }
-
-        function renderRepertoire(cat) {
-            renderRepertoireTable(repertoireData);
-        }
-
-        function renderRepertoireTable(items) {
-            const tbody = document.getElementById('repertoire-tbody');
-            tbody.innerHTML = '';
-
-            items.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-sand/40 transition-colors";
-                tr.innerHTML = `
-                    <td class="p-4 sm:p-6 font-serif text-lg font-bold text-espresso">${item.role}</td>
-                    <td class="p-4 sm:p-6 italic text-espresso/90">${item.opera}</td>
-                    <td class="p-4 sm:p-6 text-champagne font-semibold">${item.composer}</td>
-                    <td class="p-4 sm:p-6 text-xs uppercase tracking-wider text-taupe">${item.lang}</td>
-                    <td class="p-4 sm:p-6 text-right">
-                        <span class="inline-block px-3 py-1 bg-sand border border-champagne/30 text-[10px] uppercase tracking-widest text-espresso font-semibold">
-                            ${item.status}
-                        </span>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        // Render Schedule Items
-        function renderSchedule() {
-            const container = document.getElementById('schedule-container');
-            container.innerHTML = '';
-
-            scheduleData.forEach(item => {
-                const div = document.createElement('div');
-                div.className = "bg-white p-6 sm:p-8 border border-lightTaupe editorial-shadow-hover flex flex-col sm:flex-row sm:items-center justify-between gap-6";
-                div.innerHTML = `
-                    <div class="flex items-center space-x-6">
-                        <div class="bg-espresso text-porcelain p-4 text-center min-w-[90px] border-b-2 border-champagne">
-                            <span class="block font-serif text-3xl font-bold leading-none text-champagne">${item.day}</span>
-                            <span class="text-[10px] uppercase tracking-widest text-porcelain/80 mt-1 block">${item.month}</span>
-                        </div>
-                        <div>
-                            <h3 class="font-serif text-2xl font-bold text-espresso">${item.opera}</h3>
-                            <p class="text-xs uppercase tracking-wider text-taupe mt-1"><i class="fa-solid fa-location-dot text-champagne mr-2"></i>${item.venue}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-xs uppercase tracking-widest font-semibold text-champagne">${item.status}</span>
-                        <button onclick="showToast('Tickets link redirecting...')" class="px-6 py-2.5 bg-espresso text-porcelain text-xs uppercase tracking-widest font-semibold hover:bg-champagne transition-all">
-                            Tickets
-                        </button>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // Gallery Render & Lightbox
-        function renderGallery() {
-            const grid = document.getElementById('gallery-grid');
-            grid.innerHTML = '';
-
-            galleryData.forEach((item, i) => {
-                const div = document.createElement('div');
-                div.className = "group relative cursor-pointer overflow-hidden border border-lightTaupe editorial-shadow";
-                div.onclick = () => openLightbox(item);
-                div.innerHTML = `
-                    <img src="${item.img}" alt="${item.title}" class="w-full h-[380px] object-cover group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-porcelain">
-                        <span class="font-serif text-2xl font-bold text-champagne">${item.title}</span>
-                        <span class="text-xs uppercase tracking-widest opacity-80">${item.caption}</span>
-                    </div>
-                `;
-                grid.appendChild(div);
-            });
-        }
-
-        function openLightbox(item) {
-            document.getElementById('lightbox-img').src = item.img;
-            document.getElementById('lightbox-title').textContent = item.title;
-            document.getElementById('lightbox-caption').textContent = item.caption;
-            document.getElementById('lightbox-modal').classList.add('modal-active');
-            document.getElementById('lightbox-modal').classList.remove('hidden');
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox-modal').classList.remove('modal-active');
-            document.getElementById('lightbox-modal').classList.add('hidden');
-        }
-
-        let audioCtx = null;
-        let isPlayingSynth = false;
-        let synthOscillator = null;
-        let vibratoLfo = null;
-        let gainNode = null;
-
-        function toggleAudioSynthesizer() {
-            if (isPlayingSynth) {
-                stopAudioSynthesizer();
-            } else {
-                startAudioSynthesizer();
-            }
-        }
-
-        function startAudioSynthesizer() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
-            // Create Master Gain & Oscillator for Soprano Timbre (A4 / 440Hz ~ C6 / 1046Hz)
-            gainNode = audioCtx.createGain();
-            synthOscillator = audioCtx.createOscillator();
-            vibratoLfo = audioCtx.createOscillator();
-            const vibratoGain = audioCtx.createGain();
-
-            // Frequency setup for Pamina / Soprano range
-            synthOscillator.type = 'sine';
-            synthOscillator.frequency.setValueAtTime(659.25, audioCtx.currentTime); // E5
-
-            // Vibrato LFO configuration
-            const vibratoRate = parseFloat(document.getElementById('vibrato-rate').value);
-            vibratoLfo.frequency.setValueAtTime(vibratoRate, audioCtx.currentTime);
-            vibratoGain.gain.setValueAtTime(8, audioCtx.currentTime); // Pitch modulation depth
-
-            vibratoLfo.connect(vibratoGain);
-            vibratoGain.connect(synthOscillator.frequency);
-
-            // Envelope ramping
-            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.4);
-
-            synthOscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-
-            vibratoLfo.start();
-            synthOscillator.start();
-
-            isPlayingSynth = true;
-            document.getElementById('play-icon').className = 'fa-solid fa-pause';
-            document.getElementById('play-text').textContent = 'Pause Synthesis';
-            document.getElementById('audio-status-text').textContent = 'Synthesizing High Soprano Formants & Resonance...';
-        }
-
-        function stopAudioSynthesizer() {
-            if (synthOscillator && isPlayingSynth) {
-                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2);
-                setTimeout(() => {
-                    synthOscillator.stop();
-                    vibratoLfo.stop();
-                    isPlayingSynth = false;
-                    document.getElementById('play-icon').className = 'fa-solid fa-play';
-                    document.getElementById('play-text').textContent = i18n[currentLang]["audio.play_btn"];
-                    document.getElementById('audio-status-text').textContent = 'Engine ready. Press play to start live canvas visualizer.';
-                }, 200);
-            }
-        }
-
-        function loadAriaTrack() {
-            if (isPlayingSynth) {
-                stopAudioSynthesizer();
-            }
-            showToast("Aria preview audio sample selected");
-        }
-
-        // HTML5 Canvas Waveform Visualizer
-        function initCanvasVisualizer() {
-            const canvas = document.getElementById('audio-canvas');
-            const ctx = canvas.getContext('2d');
-            let animationFrameId;
-
-            function resizeCanvas() {
-                canvas.width = canvas.parentElement.clientWidth;
-                canvas.height = canvas.parentElement.clientHeight;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-
-            let phase = 0;
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                ctx.lineWidth = 1.5;
-                ctx.strokeStyle = '#c59b27';
-
-                ctx.beginPath();
-                const width = canvas.width;
-                const height = canvas.height;
-                const centerY = height / 2;
-
-                for (let x = 0; x < width; x += 5) {
-                    const amplitude = isPlayingSynth ? 35 : 10;
-                    const frequency = 0.01;
-                    const y = centerY + Math.sin(x * frequency + phase) * amplitude * Math.cos(x * 0.002);
-                    if (x === 0) {
-                        ctx.moveTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
-                    }
-                }
-                ctx.stroke();
-
-                phase += isPlayingSynth ? 0.08 : 0.02;
-                animationFrameId = requestAnimationFrame(draw);
-            }
-            draw();
-        }
-
-        // Download trigger notification
-        function triggerDownload(filename) {
-            showToast(`Downloading: ${filename}`);
-        }
-
-        // Contact Form Handler
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            showToast("Success! Your booking inquiry has been sent to management.");
-            e.target.reset();
-        }
-
-        // Toast Notification System
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-msg').textContent = msg;
-            toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 3500);
-        }
-    </script>
+      });
+    }
+  </script>
 </body>
 </html>
