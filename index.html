@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-  <!-- Swiper.js CSS (для каруселі) -->
+  <!-- Swiper.js CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <!-- Netlify Identity Widget -->
@@ -45,7 +45,7 @@
     .swiper-button-next, .swiper-button-prev { color: #c5a059 !important; }
     .swiper-pagination-bullet-active { background: #c5a059 !important; }
 
-    /* --- ЕФЕКТИ ВЗАЄМОДІЇ ТА ЗБІЛЬШЕННЯ КНОПОК --- */
+    /* Ефекти взаємодії при наведенні */
     a, button,
     .swiper-button-next, .swiper-button-prev,
     #schedule-container > div {
@@ -57,19 +57,16 @@
       display: inline-block;
     }
 
-    /* Мікро-збільшення на 3% при наведенні */
     a:hover, button:hover,
     .swiper-button-next:hover, .swiper-button-prev:hover {
       transform: scale(1.03);
     }
 
-    /* Ефект пружинистого натискання */
     a:active, button:active,
     .swiper-button-next:active, .swiper-button-prev:active {
       transform: scale(0.98);
     }
 
-    /* Картки афіші */
     #schedule-container > div {
       cursor: pointer;
     }
@@ -107,16 +104,13 @@
     </div>
   </header>
 
-  <!-- Section 1: Hero з фотографією на повному задньому фоні -->
+  <!-- Section 1: Hero (Full Background) -->
   <section id="hero" class="relative min-h-[90vh] flex items-center justify-center py-24 px-6 overflow-hidden bg-[#fcfbf9]">
-    <!-- Фонове зображення на весь екран з фірмовим світлим тонуванням -->
     <div class="absolute inset-0 z-0">
       <img id="hero-img" src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1920&auto=format&fit=crop" alt="Yuliia Zasimova" class="w-full h-full object-cover object-center" />
-      <!-- М'який світлий градієнт-вуаль для ідеальної читабельності тексту поверх фото -->
-      <div class="absolute inset-0 bg-gradient-to-r from-[#fcfbf9]/95 via-[#fcfbf9]/70 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#fcfbf9]/95 via-[#fcfbf9]/75 to-transparent"></div>
     </div>
 
-    <!-- Контент поверх фонової фотографії -->
     <div class="relative z-10 max-w-7xl mx-auto w-full px-6 grid md:grid-cols-2 items-center">
       <div class="space-y-6 text-left max-w-xl">
         <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold bg-white/80 px-3 py-1 rounded-sm shadow-sm inline-block">Soprano Portfolio</span>
@@ -189,7 +183,6 @@
       <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Listen & Watch</h2>
     </div>
 
-    <!-- Audio Tracks -->
     <div class="mb-16">
       <h3 class="text-xl font-serif mb-6 text-neutral-800 border-b pb-2">Audio Studio</h3>
       <div id="audio-container" class="space-y-4">
@@ -197,7 +190,6 @@
       </div>
     </div>
 
-    <!-- Video Embeds -->
     <div>
       <h3 class="text-xl font-serif mb-6 text-neutral-800 border-b pb-2">Featured Videos</h3>
       <div id="video-container" class="grid md:grid-cols-2 gap-6">
@@ -214,7 +206,6 @@
         <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Photo Gallery</h2>
       </div>
 
-      <!-- Swiper Slider Container -->
       <div class="swiper gallery-slider max-w-4xl mx-auto rounded-sm overflow-hidden shadow-xl bg-neutral-900">
         <div class="swiper-wrapper" id="gallery-wrapper">
           <div class="swiper-slide flex items-center justify-center text-white py-32 text-sm">
@@ -264,7 +255,6 @@
         </div>
       </div>
 
-      <!-- Social Media Links -->
       <div class="pt-6 border-t border-neutral-800 flex flex-wrap justify-center gap-6 text-xs uppercase tracking-widest text-neutral-400">
         <a id="link-instagram" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Instagram</a>
         <a id="link-facebook" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Facebook</a>
@@ -298,10 +288,10 @@
     document.addEventListener('DOMContentLoaded', async () => {
       // 1. Hero
       const hero = await fetchJSON('/content/hero.json');
-      if (hero) {
+      if (hero && hero.main_image) {
+        document.getElementById('hero-img').src = hero.main_image;
         if (hero.title) document.getElementById('hero-title').innerText = hero.title;
         if (hero.subtitle) document.getElementById('hero-subtitle').innerText = hero.subtitle;
-        if (hero.main_image) document.getElementById('hero-img').src = hero.main_image;
       }
 
       // 2. Biography
