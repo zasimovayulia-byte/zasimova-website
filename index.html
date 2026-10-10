@@ -1,460 +1,827 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yuliia Zasimova | Soprano</title>
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              gold: '#c5a059',
-              dark: '#111111',
-              card: '#f9f8f6',
-              bg: '#fcfbf9'
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuliia Zasimova — Opera Singer Portfolio Editor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cormorant Garamond & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#fef9e7',
+                            300: '#f7e4a1',
+                            400: '#eed16d',
+                            500: '#d4af37',
+                            600: '#aa8823',
+                            700: '#806316',
+                        },
+                        velvet: '#12080a',
+                        cardDark: '#1a181c',
+                        inputBg: '#26232a',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
             }
-          },
-          fontFamily: {
-            serif: ['Playfair Display', 'serif'],
-            sans: ['Inter', 'sans-serif']
-          }
         }
-      }
-    }
-  </script>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
-  <!-- Swiper.js CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-  <!-- Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-  <style>
-    body { font-family: 'Inter', sans-serif; background-color: #fcfbf9; color: #111111; }
-    h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
-    .swiper-button-next, .swiper-button-prev { color: #c5a059 !important; }
-    .swiper-pagination-bullet-active { background: #c5a059 !important; }
-
-    /* Ефекти взаємодії та мікро-збільшення на 3% */
-    a, button,
-    .swiper-button-next, .swiper-button-prev,
-    #schedule-container > div {
-      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
-      will-change: transform;
-    }
-
-    a, button {
-      display: inline-block;
-    }
-
-    a:hover, button:hover,
-    .swiper-button-next:hover, .swiper-button-prev:hover {
-      transform: scale(1.03);
-    }
-
-    a:active, button:active,
-    .swiper-button-next:active, .swiper-button-prev:active {
-      transform: scale(0.98);
-    }
-
-    #schedule-container > div {
-      cursor: pointer;
-    }
-    #schedule-container > div:hover {
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
-      border-color: #c5a059 !important;
-    }
-  </style>
+    </script>
+    
+    <style>
+        /* Custom scrollbars for editor UI */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121014;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #332d3b;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fff2cb 0%, #d4af37 50%, #aa8823 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+        }
+    </style>
 </head>
-<body class="antialiased">
+<body class="bg-black text-gray-200 font-sans h-screen flex flex-col overflow-hidden">
 
-  <!-- Header / Navigation -->
-  <header class="sticky top-0 z-50 bg-[#fcfbf9]/90 backdrop-blur-md border-b border-neutral-200/60 transition-all">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-      <a href="#" class="text-2xl font-serif font-bold tracking-widest text-neutral-900 uppercase">
-        Yuliia Zasimova
-      </a>
-      
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex space-x-8 text-xs font-medium tracking-widest uppercase text-neutral-600">
-        <a href="#biography" class="hover:text-brand-gold transition-colors">Biography</a>
-        <a href="#schedule" class="hover:text-brand-gold transition-colors">Schedule</a>
-        <a href="#repertoire" class="hover:text-brand-gold transition-colors">Repertoire</a>
-        <a href="#media" class="hover:text-brand-gold transition-colors">Listen & Watch</a>
-        <a href="#gallery" class="hover:text-brand-gold transition-colors">Gallery</a>
-        <a href="#press" class="hover:text-brand-gold transition-colors">Press</a>
-        <a href="#contact" class="hover:text-brand-gold transition-colors">Contact</a>
-      </nav>
-
-      <!-- Admin Quick Button -->
-      <a href="/admin/" class="hidden sm:inline-block border border-neutral-800 text-neutral-900 px-4 py-2 text-xs font-semibold uppercase tracking-wider hover:bg-neutral-900 hover:text-white transition-all shadow-sm">
-        CMS Admin
-      </a>
-    </div>
-  </header>
-
-  <!-- Section 1: Hero (Повноекранний фон) -->
-  <section id="hero" class="relative min-h-[90vh] flex items-center justify-center py-24 px-6 overflow-hidden bg-[#fcfbf9]">
-    <div class="absolute inset-0 z-0">
-      <img id="hero-img" src="/images/uploads/8e8ce5ed-f616-4a3e-a9e0-c0c9e7ff8751.jpeg" alt="Yuliia Zasimova" class="w-full h-full object-cover object-center" />
-      <div class="absolute inset-0 bg-gradient-to-r from-[#fcfbf9]/95 via-[#fcfbf9]/75 to-transparent"></div>
-    </div>
-
-    <div class="relative z-10 max-w-7xl mx-auto w-full px-6 grid md:grid-cols-2 items-center">
-      <div class="space-y-6 text-left max-w-xl">
-        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold bg-white/80 px-3 py-1 rounded-sm shadow-sm inline-block">Soprano Portfolio</span>
-        <h1 id="hero-title" class="text-5xl md:text-7xl font-serif text-neutral-900 leading-tight drop-shadow-sm">
-          Yuliia ZASIMOVA
-        </h1>
-        <p id="hero-subtitle" class="text-lg md:text-xl text-neutral-800 font-serif italic">
-          soprano
-        </p>
-        <div class="pt-4 flex flex-wrap gap-4">
-          <a href="#schedule" class="bg-neutral-900 text-white px-8 py-3 text-xs tracking-widest uppercase hover:bg-brand-gold transition-all shadow-md">
-            Performances
-          </a>
-          <a href="#contact" class="border border-neutral-800 bg-white/80 backdrop-blur-sm text-neutral-900 px-8 py-3 text-xs tracking-widest uppercase hover:bg-neutral-900 hover:text-white transition-all shadow-sm">
-            Inquire
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 2: Biography -->
-  <section id="biography" class="py-24 bg-brand-card border-y border-neutral-200/60">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="grid md:grid-cols-12 gap-12 items-center">
-        <div class="md:col-span-5">
-          <img id="bio-img" src="/images/uploads/8e8ce5ed-f616-4a3e-a9e0-c0c9e7ff8751.jpeg" alt="Yuliia Zasimova Biography" class="w-full h-auto rounded-sm shadow-lg object-cover" />
-        </div>
-        <div class="md:col-span-7 space-y-6">
-          <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">About the Artist</span>
-          <h2 id="bio-title" class="text-3xl md:text-4xl font-serif text-neutral-900">Biography</h2>
-          <div id="bio-body" class="text-neutral-700 leading-relaxed space-y-4 text-sm md:text-base">
-            <p>Celebrated for her sparkling coloratura agility, lyrical warmth, and captivating stage presence, Ukrainian soprano Yuliia Zasimova continues to enthrall audiences across European opera houses and concert halls.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 3: Schedule -->
-  <section id="schedule" class="py-24 max-w-5xl mx-auto px-6">
-    <div class="text-center max-w-xl mx-auto mb-16">
-      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Calendar</span>
-      <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Upcoming Performances</h2>
-    </div>
-
-    <div id="schedule-container" class="space-y-4">
-      <div class="text-center text-neutral-400 py-8">Loading schedule...</div>
-    </div>
-  </section>
-
-  <!-- Section 4: Repertoire -->
-  <section id="repertoire" class="py-24 bg-brand-card border-y border-neutral-200/60">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center max-w-xl mx-auto mb-16">
-        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Roles & Operas</span>
-        <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Repertoire</h2>
-      </div>
-
-      <div id="repertoire-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="text-center text-neutral-400 col-span-full py-8">Loading repertoire...</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 5: Media (Listen & Watch) -->
-  <section id="media" class="py-24 max-w-5xl mx-auto px-6">
-    <div class="text-center max-w-xl mx-auto mb-16">
-      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Audio & Video</span>
-      <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Listen & Watch</h2>
-    </div>
-
-    <div class="mb-16">
-      <h3 class="text-xl font-serif mb-6 text-neutral-800 border-b pb-2">Audio Studio</h3>
-      <div id="audio-container" class="space-y-4">
-        <div class="text-neutral-400 text-sm">No audio recordings available yet.</div>
-      </div>
-    </div>
-
-    <div>
-      <h3 class="text-xl font-serif mb-6 text-neutral-800 border-b pb-2">Featured Videos</h3>
-      <div id="video-container" class="grid md:grid-cols-2 gap-6">
-        <div class="text-neutral-400 text-sm col-span-full">No video recordings available yet.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 6: Gallery Carousel -->
-  <section id="gallery" class="py-24 bg-brand-card border-y border-neutral-200/60">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center max-w-xl mx-auto mb-12">
-        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Portraits & Stage</span>
-        <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Photo Gallery</h2>
-      </div>
-
-      <div class="swiper gallery-slider max-w-4xl mx-auto rounded-sm overflow-hidden shadow-xl bg-neutral-900">
-        <div class="swiper-wrapper" id="gallery-wrapper">
-          <div class="swiper-slide flex items-center justify-center text-white py-32 text-sm">
-            Завантаження фотографій...
-          </div>
-        </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 7: Press & Reviews -->
-  <section id="press" class="py-24 max-w-4xl mx-auto px-6">
-    <div class="text-center max-w-xl mx-auto mb-16">
-      <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Critical Acclaim</span>
-      <h2 class="text-3xl md:text-4xl font-serif text-neutral-900 mt-2">Press & Reviews</h2>
-    </div>
-
-    <div id="press-container" class="space-y-8">
-      <div class="text-center text-neutral-400 py-8">Loading press reviews...</div>
-    </div>
-  </section>
-
-  <!-- Section 8: Contacts & Socials -->
-  <section id="contact" class="py-24 bg-neutral-900 text-white">
-    <div class="max-w-5xl mx-auto px-6 text-center space-y-12">
-      <div class="max-w-xl mx-auto space-y-4">
-        <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Inquiries</span>
-        <h2 class="text-3xl md:text-4xl font-serif">Contact & Management</h2>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8 text-neutral-300 text-sm">
-        <div class="p-6 bg-neutral-800/50 rounded-sm">
-          <h4 class="text-brand-gold uppercase text-xs tracking-widest mb-2">Direct Contact</h4>
-          <p id="contact-email">info@yuliazassimova.com</p>
-          <p id="contact-phone" class="mt-1 text-neutral-400"></p>
-        </div>
-        <div class="p-6 bg-neutral-800/50 rounded-sm">
-          <h4 class="text-brand-gold uppercase text-xs tracking-widest mb-2">Agency / Management</h4>
-          <p id="contact-agency">General Management</p>
-        </div>
-        <div class="p-6 bg-neutral-800/50 rounded-sm">
-          <h4 class="text-brand-gold uppercase text-xs tracking-widest mb-2">Location</h4>
-          <p id="contact-location">Zurich / Kyiv</p>
-        </div>
-      </div>
-
-      <!-- Посилання на соціальні мережі -->
-      <div class="pt-6 border-t border-neutral-800 flex flex-wrap justify-center gap-6 text-xs uppercase tracking-widest text-neutral-400">
-        <a id="link-instagram" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Instagram</a>
-        <a id="link-facebook" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Facebook</a>
-        <a id="link-youtube" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">YouTube</a>
-        <a id="link-spotify" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">Spotify</a>
-        <a id="link-operabase" href="#" target="_blank" class="hover:text-brand-gold transition-colors hidden">OperaBase</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-6 bg-black text-center text-xs text-neutral-500 border-t border-neutral-800">
-    <p>&copy; 2026 Yuliia Zasimova. All rights reserved.</p>
-  </footer>
-
-  <!-- Swiper.js Script -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-  <!-- Скрипт завантаження даних з CMS -->
-  <script>
-    async function fetchJSON(url) {
-      try {
-        const res = await fetch(url);
-        if (!res.ok) return null;
-        return await res.json();
-      } catch (e) {
-        return null;
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      // 1. Hero
-      const hero = await fetchJSON('/content/hero.json');
-      if (hero) {
-        if (hero.main_image) {
-          let imgUrl = hero.main_image;
-          if (!imgUrl.startsWith('/') && !imgUrl.startsWith('http')) {
-            imgUrl = '/' + imgUrl;
-          }
-          document.getElementById('hero-img').src = imgUrl;
-        }
-        if (hero.title) document.getElementById('hero-title').innerText = hero.title;
-        if (hero.subtitle) document.getElementById('hero-subtitle').innerText = hero.subtitle;
-      }
-
-      // 2. Biography
-      const bio = await fetchJSON('/content/biography.json');
-      if (bio) {
-        if (bio.title) document.getElementById('bio-title').innerText = bio.title;
-        if (bio.body) document.getElementById('bio-body').innerHTML = bio.body;
-        if (bio.bio_image) {
-          let bioImg = bio.bio_image;
-          if (!bioImg.startsWith('/') && !bioImg.startsWith('http')) bioImg = '/' + bioImg;
-          document.getElementById('bio-img').src = bioImg;
-        }
-      }
-
-      // 3. Schedule
-      const schedule = await fetchJSON('/content/schedule.json');
-      const scheduleEl = document.getElementById('schedule-container');
-      if (schedule && schedule.events && schedule.events.length > 0) {
-        scheduleEl.innerHTML = schedule.events.map(ev => `
-          <div class="bg-brand-card p-6 rounded-sm border border-neutral-200/80 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all">
-            <div class="flex items-center gap-6">
-              <div class="text-center min-w-[70px] border-r border-neutral-200 pr-6">
-                <span class="block text-2xl font-serif font-bold text-neutral-900">${ev.day || ''}</span>
-                <span class="block text-xs uppercase tracking-wider text-brand-gold font-medium">${ev.month || ''}</span>
-              </div>
-              <div>
-                <h3 class="text-lg font-serif font-semibold text-neutral-900">${ev.opera || ''}</h3>
-                <p class="text-sm text-neutral-600">${ev.role ? 'Role: ' + ev.role : ''}</p>
-              </div>
+    <!-- TOP NAVIGATION BAR -->
+    <header class="h-16 bg-[#0d0c0e] border-b border-gray-800 px-6 flex items-center justify-between z-30 shrink-0">
+        <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-full bg-gold-500/20 border border-gold-500 flex items-center justify-between justify-center text-gold-400 font-serif font-bold text-lg">
+                YZ
             </div>
-            <div class="text-left sm:text-right text-xs text-neutral-500 uppercase tracking-wider">
-              <p class="font-medium text-neutral-800">${ev.house || ''}</p>
-              <p>${ev.location || ''}</p>
+            <div>
+                <h1 class="font-serif text-lg font-bold text-white tracking-wide">Yuliia Zasimova <span class="text-xs text-gold-500 font-sans font-normal ml-2 uppercase tracking-widest border border-gold-500/40 px-2 py-0.5 rounded">Editor</span></h1>
+                <p class="text-xs text-gray-400">Live Opera Portfolio Studio & Export Suite</p>
             </div>
-          </div>
-        `).join('');
-      } else {
-        scheduleEl.innerHTML = '<div class="text-center text-neutral-400 py-6">No upcoming dates published yet.</div>';
-      }
+        </div>
 
-      // 4. Repertoire
-      const repertoire = await fetchJSON('/content/repertoire.json');
-      const repEl = document.getElementById('repertoire-container');
-      if (repertoire && repertoire.roles && repertoire.roles.length > 0) {
-        repEl.innerHTML = repertoire.roles.map(r => `
-          <div class="p-5 bg-white border border-neutral-200/80 rounded-sm">
-            <span class="text-xs uppercase text-brand-gold font-semibold tracking-wider">${r.composer || ''}</span>
-            <h4 class="text-lg font-serif text-neutral-900 mt-1">${r.opera || ''}</h4>
-            <p class="text-sm text-neutral-600 mt-2">Party: <span class="font-medium text-neutral-800">${r.role || ''}</span></p>
-          </div>
-        `).join('');
-      } else {
-        repEl.innerHTML = '<div class="text-center text-neutral-400 col-span-full py-6">Repertoire list updating...</div>';
-      }
-
-      // 5. Media
-      const media = await fetchJSON('/content/media.json');
-      if (media) {
-        const audioEl = document.getElementById('audio-container');
-        if (media.audio_tracks && media.audio_tracks.length > 0) {
-          audioEl.innerHTML = media.audio_tracks.map(t => `
-            <div class="p-4 bg-brand-card rounded-sm border border-neutral-200 flex flex-col sm:flex-row justify-between items-center gap-4">
-              <div>
-                <h4 class="font-serif font-semibold text-neutral-900">${t.title || ''}</h4>
-                <p class="text-xs text-neutral-500">${t.subtitle || ''}</p>
-              </div>
-              <audio controls class="w-full sm:w-64 h-8">
-                <source src="${t.audio_file}" type="audio/mpeg">
-              </audio>
+        <!-- View Controls & Action Buttons -->
+        <div class="flex items-center space-x-3">
+            <!-- View toggle for mobile/desktop split -->
+            <div class="bg-gray-900 border border-gray-700 p-1 rounded-lg text-xs flex space-x-1">
+                <button id="btn-split-view" onclick="setViewMode('split')" class="px-3 py-1.5 rounded-md bg-gold-500 text-black font-medium transition">
+                    <i class="fa-solid fa-columns mr-1"></i> Split View
+                </button>
+                <button id="btn-editor-view" onclick="setViewMode('editor')" class="px-3 py-1.5 rounded-md text-gray-400 hover:text-white transition">
+                    <i class="fa-solid fa-pen-to-square mr-1"></i> Editor Only
+                </button>
+                <button id="btn-preview-view" onclick="setViewMode('preview')" class="px-3 py-1.5 rounded-md text-gray-400 hover:text-white transition">
+                    <i class="fa-solid fa-eye mr-1"></i> Full Preview
+                </button>
             </div>
-          `).join('');
-        }
 
-        const videoEl = document.getElementById('video-container');
-        if (media.videos && media.videos.length > 0) {
-          videoEl.innerHTML = media.videos.map(v => `
-            <div class="p-4 bg-brand-card border border-neutral-200 rounded-sm space-y-2">
-              <h4 class="font-serif font-semibold text-neutral-900">${v.title || ''}</h4>
-              <a href="${v.video_url}" target="_blank" class="inline-block text-xs text-brand-gold hover:underline uppercase tracking-wider">
-                Watch Performance &rarr;
-              </a>
+            <div class="h-6 w-px bg-gray-800"></div>
+
+            <button onclick="copyGeneratedHTML()" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-semibold rounded-lg border border-gray-700 flex items-center transition">
+                <i class="fa-regular fa-copy mr-2 text-gold-400"></i> Copy HTML
+            </button>
+            <button onclick="downloadHTMLFile()" class="px-4 py-2 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-black text-xs font-bold rounded-lg shadow-lg flex items-center transition">
+                <i class="fa-solid fa-download mr-2"></i> Export HTML
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN WORKSPACE SPLIT VIEW -->
+    <div id="main-container" class="flex-1 flex overflow-hidden">
+
+        <!-- LEFT PANEL: EDITOR TABS -->
+        <div id="editor-panel" class="w-1/2 min-w-[360px] bg-[#121014] border-r border-gray-800 flex flex-col h-full z-10 transition-all duration-300">
+            
+            <!-- EDITOR TABS HEADER -->
+            <div class="flex border-b border-gray-800 bg-[#16141a] overflow-x-auto text-xs">
+                <button id="tab-bio" onclick="switchTab('bio')" class="px-4 py-3.5 font-medium border-b-2 border-gold-500 text-gold-400 flex items-center whitespace-nowrap transition">
+                    <i class="fa-solid fa-user-nib mr-2"></i> Biography & Hero
+                </button>
+                <button id="tab-audio" onclick="switchTab('audio')" class="px-4 py-3.5 font-medium border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center whitespace-nowrap transition">
+                    <i class="fa-solid fa-music mr-2"></i> Audio & Repertoire
+                </button>
+                <button id="tab-gallery" onclick="switchTab('gallery')" class="px-4 py-3.5 font-medium border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center whitespace-nowrap transition">
+                    <i class="fa-solid fa-images mr-2"></i> Photo Gallery
+                </button>
+                <button id="tab-contact" onclick="switchTab('contact')" class="px-4 py-3.5 font-medium border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center whitespace-nowrap transition">
+                    <i class="fa-solid fa-envelope mr-2"></i> Contact & Formspree
+                </button>
             </div>
-          `).join('');
-        }
-      }
 
-      // 6. Gallery (Swiper Carousel)
-      const gallery = await fetchJSON('/content/gallery.json');
-      const galleryWrapper = document.getElementById('gallery-wrapper');
-      if (gallery && gallery.photos && gallery.photos.length > 0) {
-        galleryWrapper.innerHTML = gallery.photos.map(p => `
-          <div class="swiper-slide relative">
-            <img src="${p.image}" alt="${p.caption || 'Yuliia Zasimova'}" class="w-full h-[550px] object-cover" />
-            ${p.caption ? `<div class="absolute bottom-0 inset-x-0 p-4 bg-black/60 text-white text-center text-xs tracking-wider backdrop-blur-sm">${p.caption}</div>` : ''}
-          </div>
-        `).join('');
+            <!-- EDITOR CONTENT PANELS -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-6 text-sm">
 
-        new Swiper('.gallery-slider', {
-          loop: true,
-          autoplay: { delay: 4000, disableOnInteraction: false },
-          navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-          pagination: { el: '.swiper-pagination', clickable: true }
-        });
-      } else {
-        galleryWrapper.innerHTML = '<div class="swiper-slide py-20 text-center text-neutral-400">Add photos in CMS Gallery section.</div>';
-      }
+                <!-- SECTION 1: BIOGRAPHY & HERO -->
+                <div id="panel-bio" class="space-y-5">
+                    <div class="flex justify-between items-center pb-2 border-b border-gray-800">
+                        <h2 class="text-base font-semibold text-white flex items-center">
+                            <i class="fa-solid fa-star text-gold-500 mr-2"></i> General Info & Biography
+                        </h2>
+                        <span class="text-xs text-gray-500">Live Sync</span>
+                    </div>
 
-      // 7. Press
-      const press = await fetchJSON('/content/press.json');
-      const pressEl = document.getElementById('press-container');
-      if (press && press.reviews && press.reviews.length > 0) {
-        pressEl.innerHTML = press.reviews.map(pr => `
-          <blockquote class="p-8 bg-brand-card border-l-2 border-brand-gold text-neutral-800 space-y-3 rounded-r-sm">
-            <p class="text-lg font-serif italic">"${pr.quote || ''}"</p>
-            <footer class="text-xs uppercase tracking-widest text-neutral-500 font-semibold">
-              — ${pr.source || ''} ${pr.author ? `(${pr.author})` : ''}
-            </footer>
-          </blockquote>
-        `).join('');
-      } else {
-        pressEl.innerHTML = '<div class="text-center text-neutral-400 py-6">No press reviews added yet.</div>';
-      }
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">Full Name</label>
+                            <input type="text" id="input-name" oninput="updateState('name', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2.5 text-white focus:border-gold-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">Vocal Voice / Title</label>
+                            <input type="text" id="input-title" oninput="updateState('title', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2.5 text-white focus:border-gold-500 outline-none">
+                        </div>
+                    </div>
 
-      // 8. Contacts & Social Links
-      const contacts = await fetchJSON('/content/contacts.json');
-      if (contacts) {
-        if (contacts.email) document.getElementById('contact-email').innerText = contacts.email;
-        if (contacts.phone) document.getElementById('contact-phone').innerText = contacts.phone;
-        if (contacts.agency) document.getElementById('contact-agency').innerText = contacts.agency;
-        if (contacts.location) document.getElementById('contact-location').innerText = contacts.location;
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Tagline / Subheading</label>
+                        <input type="text" id="input-tagline" oninput="updateState('tagline', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2.5 text-white focus:border-gold-500 outline-none">
+                    </div>
 
-        const setSocial = (id, url) => {
-          if (url) {
-            const el = document.getElementById(id);
-            el.href = url;
-            el.classList.remove('hidden');
-          }
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Hero Portrait Image URL or Upload</label>
+                        <div class="flex space-x-2">
+                            <input type="text" id="input-heroImg" oninput="updateState('heroImg', this.value)" class="flex-1 bg-inputBg border border-gray-700 rounded-lg p-2.5 text-white text-xs focus:border-gold-500 outline-none">
+                            <label class="cursor-pointer bg-gray-800 hover:bg-gray-700 px-3 py-2 rounded-lg border border-gray-700 flex items-center justify-center text-xs text-gray-200">
+                                <i class="fa-solid fa-upload mr-1"></i> File
+                                <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'heroImg')">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Biography Paragraphs</label>
+                        <textarea id="input-bio" rows="6" oninput="updateState('bio', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2.5 text-white focus:border-gold-500 outline-none text-xs leading-relaxed"></textarea>
+                    </div>
+
+                    <!-- Opera Highlights / Key Roles -->
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Key Opera Roles / Highlights (comma separated)</label>
+                        <input type="text" id="input-roles" oninput="updateState('roles', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2.5 text-white focus:border-gold-500 outline-none text-xs">
+                    </div>
+                </div>
+
+                <!-- SECTION 2: AUDIO & REPERTOIRE -->
+                <div id="panel-audio" class="space-y-5 hidden">
+                    <div class="flex justify-between items-center pb-2 border-b border-gray-800">
+                        <h2 class="text-base font-semibold text-white flex items-center">
+                            <i class="fa-solid fa-compact-disc text-gold-500 mr-2"></i> Audio Player & Repertoire
+                        </h2>
+                        <button onclick="addAudioTrack()" class="text-xs bg-gold-500/10 text-gold-400 border border-gold-500/30 hover:bg-gold-500/20 px-3 py-1.5 rounded-lg transition flex items-center">
+                            <i class="fa-solid fa-plus mr-1"></i> Add Track
+                        </button>
+                    </div>
+
+                    <p class="text-xs text-gray-400">Add MP3 track links or upload audio files to feature opera performances and arias on your page player.</p>
+
+                    <div id="audio-tracks-list" class="space-y-4">
+                        <!-- Dynamic Audio Track Inputs -->
+                    </div>
+                </div>
+
+                <!-- SECTION 3: PHOTO GALLERY -->
+                <div id="panel-gallery" class="space-y-5 hidden">
+                    <div class="flex justify-between items-center pb-2 border-b border-gray-800">
+                        <h2 class="text-base font-semibold text-white flex items-center">
+                            <i class="fa-solid fa-camera-retro text-gold-500 mr-2"></i> Photo Gallery Management
+                        </h2>
+                        <button onclick="addGalleryImage()" class="text-xs bg-gold-500/10 text-gold-400 border border-gold-500/30 hover:bg-gold-500/20 px-3 py-1.5 rounded-lg transition flex items-center">
+                            <i class="fa-solid fa-plus mr-1"></i> Add Image
+                        </button>
+                    </div>
+
+                    <p class="text-xs text-gray-400">Manage high-resolution concert photos, stage performances, and portraits for the portfolio gallery.</p>
+
+                    <div id="gallery-items-list" class="grid grid-cols-1 gap-4">
+                        <!-- Dynamic Gallery Image Inputs -->
+                    </div>
+                </div>
+
+                <!-- SECTION 4: CONTACT & FORMSPREE -->
+                <div id="panel-contact" class="space-y-5 hidden">
+                    <div class="flex justify-between items-center pb-2 border-b border-gray-800">
+                        <h2 class="text-base font-semibold text-white flex items-center">
+                            <i class="fa-solid fa-paper-plane text-gold-500 mr-2"></i> Contact & Formspree Integration
+                        </h2>
+                    </div>
+
+                    <div class="bg-gold-500/10 border border-gold-500/20 p-4 rounded-xl space-y-2">
+                        <div class="text-xs font-semibold text-gold-400 flex items-center">
+                            <i class="fa-solid fa-circle-check mr-2"></i> Formspree Email Destination:
+                        </div>
+                        <p class="text-xs text-gray-300">Form messages will be automatically delivered directly to <strong class="text-white font-mono">zasimova.yulia@gmail.com</strong>.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Formspree Endpoint ID or Custom URL</label>
+                        <input type="text" id="input-formspree" oninput="updateState('formspreeUrl', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2.5 text-white text-xs focus:border-gold-500 outline-none font-mono">
+                        <p class="text-[11px] text-gray-500 mt-1">Example: <code class="text-gray-400">https://formspree.io/f/xknlqwbz</code> (You can create a free form ID on Formspree.io to route to zasimova.yulia@gmail.com)</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">Management / Booking Agent Email</label>
+                            <input type="text" id="input-contactEmail" oninput="updateState('contactEmail', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2.5 text-white text-xs focus:border-gold-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-400 mb-1">Location / Opera House</label>
+                            <input type="text" id="input-location" oninput="updateState('location', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2.5 text-white text-xs focus:border-gold-500 outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Social links -->
+                    <div class="space-y-3 pt-2">
+                        <h3 class="text-xs font-semibold text-gray-300 uppercase tracking-wider">Social Media Links</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">Instagram URL</label>
+                                <input type="text" id="input-instagram" oninput="updateState('instagram', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2 text-white text-xs focus:border-gold-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">YouTube URL</label>
+                                <input type="text" id="input-youtube" oninput="updateState('youtube', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2 text-white text-xs focus:border-gold-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: LIVE PREVIEW IFRAME -->
+        <div id="preview-panel" class="w-1/2 flex-1 bg-black flex flex-col h-full relative">
+            <div class="h-9 bg-[#17151a] border-b border-gray-800 px-4 flex items-center justify-between text-xs text-gray-400 z-10 shrink-0">
+                <div class="flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500 inline-block animate-pulse"></span>
+                    <span class="font-mono text-[11px] text-gray-300">Live Preview: yuliiazasimova.com</span>
+                </div>
+                <div class="flex items-center space-x-3 text-xs">
+                    <button onclick="refreshPreview()" class="hover:text-gold-400 transition" title="Refresh Preview">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </button>
+                    <span id="preview-dimensions" class="font-mono text-[11px] text-gray-500">Auto Responsive</span>
+                </div>
+            </div>
+
+            <!-- Previews Container -->
+            <div class="flex-1 w-full h-full bg-[#080709] relative flex items-center justify-center p-2">
+                <iframe id="live-preview-iframe" class="w-full h-full border-0 rounded-lg shadow-2xl bg-black"></iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="toast-message" class="fixed bottom-6 right-6 bg-gold-500 text-black px-5 py-3 rounded-xl shadow-2xl font-semibold text-xs flex items-center space-x-2 transition-all transform translate-y-20 opacity-0 z-50">
+        <i class="fa-solid fa-circle-check text-sm"></i>
+        <span id="toast-text">Action completed successfully!</span>
+    </div>
+
+    <script>
+        // APP STATE WITH YULIIA ZASIMOVA DEFAULT CONTENT
+        let state = {
+            name: "Yuliia Zasimova",
+            title: "Soprano Opera Artist",
+            tagline: "Expressive Operatic Performances, Masterful Coloratura & Classical Repertoire",
+            heroImg: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1200&auto=format&fit=crop",
+            bio: "Yuliia Zasimova is an acclaimed Ukrainian soprano renowned for her brilliant vocal technique, dramatic depth, and captivating stage presence across leading European opera houses. Her repertoire spans classical bel canto masterpieces, Mozartian roles, and modern dramatic compositions.\n\nShe regularly collaborates with prominent conductors and symphony orchestras, enchanting audiences with effortless vocal agility and refined musical interpretation.",
+            roles: "Violetta (La Traviata), Queen of the Night (The Magic Flute), Lucia (Lucia di Lammermoor), Musetta (La Bohème), Susanna (Le Nozze di Figaro)",
+            contactEmail: "zasimova.yulia@gmail.com",
+            location: "Kyiv / Vienna / Worldwide Opera Stage",
+            formspreeUrl: "https://formspree.io/f/zasimova.yulia@gmail.com",
+            instagram: "https://instagram.com",
+            youtube: "https://youtube.com",
+            audioTracks: [
+                {
+                    title: "Der Hölle Rache (The Magic Flute)",
+                    composer: "W. A. Mozart",
+                    role: "Queen of the Night",
+                    url: "https://actions.google.com/sounds/v1/ambiences/orchestra_tuning.ogg"
+                },
+                {
+                    title: "Sempre Libera (La Traviata)",
+                    composer: "Giuseppe Verdi",
+                    role: "Violetta Valéry",
+                    url: "https://actions.google.com/sounds/v1/ambiences/audience_applause.ogg"
+                }
+            ],
+            gallery: [
+                {
+                    url: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&auto=format&fit=crop",
+                    caption: "Operatic Recital Performance"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=80&w=800&auto=format&fit=crop",
+                    caption: "Symphony Orchestra Concert"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=800&auto=format&fit=crop",
+                    caption: "Stage Rehearsal Portrait"
+                }
+            ]
         };
 
-        setSocial('link-instagram', contacts.instagram);
-        setSocial('link-facebook', contacts.facebook);
-        setSocial('link-youtube', contacts.youtube);
-        setSocial('link-spotify', contacts.spotify);
-        setSocial('link-operabase', contacts.operabase);
-      }
-    });
+        // Initialize Editor Inputs
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('input-name').value = state.name;
+            document.getElementById('input-title').value = state.title;
+            document.getElementById('input-tagline').value = state.tagline;
+            document.getElementById('input-heroImg').value = state.heroImg;
+            document.getElementById('input-bio').value = state.bio;
+            document.getElementById('input-roles').value = state.roles;
+            document.getElementById('input-contactEmail').value = state.contactEmail;
+            document.getElementById('input-location').value = state.location;
+            document.getElementById('input-formspree').value = state.formspreeUrl;
+            document.getElementById('input-instagram').value = state.instagram;
+            document.getElementById('input-youtube').value = state.youtube;
 
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
+            renderAudioTrackInputs();
+            renderGalleryInputs();
+            updateLivePreview();
+        });
+
+        // Tab Switching Logic
+        function switchTab(tabKey) {
+            const tabs = ['bio', 'audio', 'gallery', 'contact'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                const panel = document.getElementById(`panel-${t}`);
+                if (t === tabKey) {
+                    btn.className = "px-4 py-3.5 font-medium border-b-2 border-gold-500 text-gold-400 flex items-center whitespace-nowrap transition";
+                    panel.classList.remove('hidden');
+                } else {
+                    btn.className = "px-4 py-3.5 font-medium border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center whitespace-nowrap transition";
+                    panel.classList.add('hidden');
+                }
+            });
         }
-      });
-    }
-  </script>
+
+        // View Mode Control (Split, Editor, Preview)
+        function setViewMode(mode) {
+            const editorPanel = document.getElementById('editor-panel');
+            const previewPanel = document.getElementById('preview-panel');
+            const btnSplit = document.getElementById('btn-split-view');
+            const btnEditor = document.getElementById('btn-editor-view');
+            const btnPreview = document.getElementById('btn-preview-view');
+
+            btnSplit.className = "px-3 py-1.5 rounded-md text-gray-400 hover:text-white transition";
+            btnEditor.className = "px-3 py-1.5 rounded-md text-gray-400 hover:text-white transition";
+            btnPreview.className = "px-3 py-1.5 rounded-md text-gray-400 hover:text-white transition";
+
+            if (mode === 'split') {
+                btnSplit.className = "px-3 py-1.5 rounded-md bg-gold-500 text-black font-medium transition";
+                editorPanel.style.display = 'flex';
+                editorPanel.style.width = '50%';
+                previewPanel.style.display = 'flex';
+                previewPanel.style.width = '50%';
+            } else if (mode === 'editor') {
+                btnEditor.className = "px-3 py-1.5 rounded-md bg-gold-500 text-black font-medium transition";
+                editorPanel.style.display = 'flex';
+                editorPanel.style.width = '100%';
+                previewPanel.style.display = 'none';
+            } else if (mode === 'preview') {
+                btnPreview.className = "px-3 py-1.5 rounded-md bg-gold-500 text-black font-medium transition";
+                editorPanel.style.display = 'none';
+                previewPanel.style.display = 'flex';
+                previewPanel.style.width = '100%';
+            }
+        }
+
+        // State Updates & Real-time Sync
+        function updateState(key, value) {
+            state[key] = value;
+            updateLivePreview();
+        }
+
+        // Handle Image Upload File Convert to Data URL
+        function handleImageUpload(event, key, index = null) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const dataUrl = e.target.result;
+                if (index !== null) {
+                    state.gallery[index].url = dataUrl;
+                    renderGalleryInputs();
+                } else {
+                    state[key] = dataUrl;
+                    document.getElementById(`input-${key}`).value = dataUrl;
+                }
+                updateLivePreview();
+                showToast("Image uploaded successfully!");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Render Audio Inputs in Editor
+        function renderAudioTrackInputs() {
+            const container = document.getElementById('audio-tracks-list');
+            container.innerHTML = '';
+
+            state.audioTracks.forEach((track, idx) => {
+                const div = document.createElement('div');
+                div.className = 'bg-cardDark border border-gray-800 p-4 rounded-xl space-y-3 relative';
+                div.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-semibold text-gold-400">Track #${idx + 1}</span>
+                        <button onclick="removeAudioTrack(${idx})" class="text-xs text-red-400 hover:text-red-300">
+                            <i class="fa-solid fa-trash mr-1"></i> Remove
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] text-gray-400 mb-1">Aria Title</label>
+                            <input type="text" value="${escapeHtml(track.title)}" oninput="updateAudioTrack(${idx}, 'title', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2 text-white text-xs focus:border-gold-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-gray-400 mb-1">Composer</label>
+                            <input type="text" value="${escapeHtml(track.composer)}" oninput="updateAudioTrack(${idx}, 'composer', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2 text-white text-xs focus:border-gold-500 outline-none">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] text-gray-400 mb-1">Role / Opera</label>
+                            <input type="text" value="${escapeHtml(track.role)}" oninput="updateAudioTrack(${idx}, 'role', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2 text-white text-xs focus:border-gold-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-gray-400 mb-1">Audio File URL (MP3)</label>
+                            <input type="text" value="${escapeHtml(track.url)}" oninput="updateAudioTrack(${idx}, 'url', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2 text-white text-xs focus:border-gold-500 outline-none">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function addAudioTrack() {
+            state.audioTracks.push({
+                title: "New Aria Title",
+                composer: "Composer Name",
+                role: "Opera Role",
+                url: "https://actions.google.com/sounds/v1/ambiences/orchestra_tuning.ogg"
+            });
+            renderAudioTrackInputs();
+            updateLivePreview();
+        }
+
+        function removeAudioTrack(idx) {
+            state.audioTracks.splice(idx, 1);
+            renderAudioTrackInputs();
+            updateLivePreview();
+        }
+
+        function updateAudioTrack(idx, field, val) {
+            state.audioTracks[idx][field] = val;
+            updateLivePreview();
+        }
+
+        // Render Gallery Inputs in Editor
+        function renderGalleryInputs() {
+            const container = document.getElementById('gallery-items-list');
+            container.innerHTML = '';
+
+            state.gallery.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'bg-cardDark border border-gray-800 p-4 rounded-xl space-y-3';
+                div.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-semibold text-gold-400">Photo #${idx + 1}</span>
+                        <button onclick="removeGalleryImage(${idx})" class="text-xs text-red-400 hover:text-red-300">
+                            <i class="fa-solid fa-trash mr-1"></i> Delete
+                        </button>
+                    </div>
+                    <div class="flex space-x-3 items-center">
+                        <img src="${item.url}" class="w-16 h-16 object-cover rounded-lg border border-gray-700" onerror="this.src='https://placehold.co/100x100/1e1b24/d4af37?text=Image'">
+                        <div class="flex-1 space-y-2">
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">Image URL or Local Upload</label>
+                                <div class="flex space-x-2">
+                                    <input type="text" value="${escapeHtml(item.url)}" oninput="updateGalleryImage(${idx}, 'url', this.value)" class="flex-1 bg-inputBg border border-gray-700 rounded-lg p-2 text-white text-xs focus:border-gold-500 outline-none">
+                                    <label class="cursor-pointer bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-lg border border-gray-700 flex items-center justify-center text-xs text-gray-200">
+                                        Upload
+                                        <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, null, ${idx})">
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-gray-400 mb-1">Caption / Context</label>
+                                <input type="text" value="${escapeHtml(item.caption)}" oninput="updateGalleryImage(${idx}, 'caption', this.value)" class="w-full bg-inputBg border border-gray-700 rounded-lg p-2 text-white text-xs focus:border-gold-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function addGalleryImage() {
+            state.gallery.push({
+                url: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&auto=format&fit=crop",
+                caption: "New Operatic Performance Photo"
+            });
+            renderGalleryInputs();
+            updateLivePreview();
+        }
+
+        function removeGalleryImage(idx) {
+            state.gallery.splice(idx, 1);
+            renderGalleryInputs();
+            updateLivePreview();
+        }
+
+        function updateGalleryImage(idx, field, val) {
+            state.gallery[idx][field] = val;
+            updateLivePreview();
+        }
+
+        // GENERATE ENTIRE PREVIEW PORTFOLIO HTML
+        function generatePortfolioHTML() {
+            const rolesList = state.roles.split(',').map(r => r.trim()).filter(r => r.length > 0);
+            
+            return `<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${escapeHtml(state.name)} — ${escapeHtml(state.title)}</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            300: '#f7e4a1',
+                            400: '#eed16d',
+                            500: '#d4af37',
+                            600: '#aa8823',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    <\/script>
+    <style>
+        body { background-color: #0a090b; color: #e5e7eb; }
+        .gold-text {
+            background: linear-gradient(135deg, #fff2cb 0%, #d4af37 50%, #aa8823 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-gold-500 selection:text-black">
+
+    <!-- HEADER / NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4 flex items-center justify-between">
+        <a href="#" class="font-serif text-2xl font-bold tracking-wider gold-text">${escapeHtml(state.name)}</a>
+        <div class="hidden md:flex space-x-8 text-xs font-medium uppercase tracking-widest text-gray-300">
+            <a href="#about" class="hover:text-gold-400 transition">Biography</a>
+            <a href="#audio" class="hover:text-gold-400 transition">Audio & Repertoire</a>
+            <a href="#gallery" class="hover:text-gold-400 transition">Gallery</a>
+            <a href="#contact" class="hover:text-gold-400 transition">Contact</a>
+        </div>
+        <a href="#contact" class="px-4 py-2 text-xs uppercase tracking-wider font-semibold border border-gold-500/60 text-gold-400 hover:bg-gold-500 hover:text-black rounded-full transition">Book Performance</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="min-h-screen pt-24 pb-12 px-6 flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a090b] via-transparent to-black/60 z-10"></div>
+        <div class="max-w-6xl w-full grid md:grid-cols-12 gap-12 items-center relative z-20">
+            <div class="md:col-span-7 space-y-6">
+                <span class="text-xs uppercase tracking-[0.3em] font-semibold text-gold-400 border-l-2 border-gold-500 pl-3 inline-block">${escapeHtml(state.title)}</span>
+                <h1 class="font-serif text-5xl md:text-7xl font-bold text-white leading-tight">${escapeHtml(state.name)}</h1>
+                <p class="text-lg text-gray-300 font-serif italic max-w-xl">${escapeHtml(state.tagline)}</p>
+                <div class="pt-4 flex flex-wrap gap-4">
+                    <a href="#audio" class="px-6 py-3 bg-gradient-to-r from-gold-600 to-gold-500 text-black font-semibold rounded-full text-xs uppercase tracking-wider shadow-xl hover:opacity-90 transition flex items-center">
+                        <i class="fa-solid fa-play mr-2"></i> Listen to Arias
+                    </a>
+                    <a href="#contact" class="px-6 py-3 border border-gray-700 hover:border-gold-500 text-gray-300 hover:text-white font-semibold rounded-full text-xs uppercase tracking-wider transition">
+                        Contact Management
+                    </a>
+                </div>
+            </div>
+            <div class="md:col-span-5 relative">
+                <div class="relative w-full aspect-[3/4] rounded-2xl overflow-hidden border border-gold-500/30 shadow-2xl">
+                    <img src="${escapeHtml(state.heroImg)}" alt="${escapeHtml(state.name)}" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BIOGRAPHY SECTION -->
+    <section id="about" class="py-20 px-6 bg-[#0f0e12] border-t border-b border-white/5">
+        <div class="max-w-4xl mx-auto space-y-10">
+            <div class="text-center space-y-3">
+                <h2 class="font-serif text-4xl font-bold text-white">Biography</h2>
+                <div class="w-16 h-0.5 bg-gold-500 mx-auto"></div>
+            </div>
+            <div class="text-gray-300 leading-relaxed space-y-4 text-base font-light">
+                ${state.bio.split('\n\n').map(p => `<p>${escapeHtml(p)}</p>`).join('')}
+            </div>
+
+            <!-- Opera Highlights / Roles -->
+            ${rolesList.length > 0 ? `
+            <div class="pt-6 border-t border-gray-800">
+                <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 mb-4 text-center">Featured Opera Roles</h3>
+                <div class="flex flex-wrap justify-center gap-2">
+                    ${rolesList.map(role => `<span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 font-medium">${escapeHtml(role)}</span>`).join('')}
+                </div>
+            </div>
+            ` : ''}
+        </div>
+    </section>
+
+    <!-- AUDIO & REPERTOIRE SECTION -->
+    <section id="audio" class="py-20 px-6 max-w-5xl mx-auto space-y-12">
+        <div class="text-center space-y-3">
+            <span class="text-xs uppercase tracking-[0.2em] font-semibold text-gold-400">Listen</span>
+            <h2 class="font-serif text-4xl font-bold text-white">Audio Recordings & Arias</h2>
+            <div class="w-16 h-0.5 bg-gold-500 mx-auto"></div>
+        </div>
+
+        <div class="space-y-4">
+            ${state.audioTracks.map((track, idx) => `
+            <div class="bg-[#141218] border border-white/10 p-5 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-gold-500/40 transition">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 shrink-0">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-lg font-bold text-white">${escapeHtml(track.title)}</h4>
+                        <p class="text-xs text-gray-400">${escapeHtml(track.composer)} — <span class="text-gold-400">${escapeHtml(track.role)}</span></p>
+                    </div>
+                </div>
+                <div class="w-full md:w-72">
+                    <audio controls class="w-full h-9 rounded-lg">
+                        <source src="${escapeHtml(track.url)}" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+            `).join('')}
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="py-20 px-6 bg-[#0f0e12] border-t border-white/5">
+        <div class="max-w-6xl mx-auto space-y-12">
+            <div class="text-center space-y-3">
+                <h2 class="font-serif text-4xl font-bold text-white">Photo Gallery</h2>
+                <div class="w-16 h-0.5 bg-gold-500 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                ${state.gallery.map(img => `
+                <div class="group relative aspect-[4/3] rounded-xl overflow-hidden border border-white/10 bg-black">
+                    <img src="${escapeHtml(img.url)}" alt="${escapeHtml(img.caption)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition p-4 flex items-end">
+                        <p class="text-xs text-gold-300 font-medium">${escapeHtml(img.caption)}</p>
+                    </div>
+                </div>
+                `).join('')}
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & FORMSPREE SECTION -->
+    <section id="contact" class="py-20 px-6 max-w-4xl mx-auto space-y-12">
+        <div class="text-center space-y-3">
+            <span class="text-xs uppercase tracking-[0.2em] font-semibold text-gold-400">Get in Touch</span>
+            <h2 class="font-serif text-4xl font-bold text-white">Contact & Bookings</h2>
+            <div class="w-16 h-0.5 bg-gold-500 mx-auto"></div>
+        </div>
+
+        <div class="grid md:grid-cols-12 gap-8">
+            <div class="md:col-span-5 bg-[#141218] p-6 rounded-2xl border border-white/10 space-y-6">
+                <div>
+                    <h4 class="text-xs uppercase tracking-wider font-semibold text-gold-400 mb-1">Direct Contact</h4>
+                    <p class="text-sm font-medium text-white">${escapeHtml(state.contactEmail)}</p>
+                </div>
+                <div>
+                    <h4 class="text-xs uppercase tracking-wider font-semibold text-gold-400 mb-1">Location</h4>
+                    <p class="text-sm text-gray-300">${escapeHtml(state.location)}</p>
+                </div>
+                <div class="pt-4 border-t border-gray-800 flex space-x-4">
+                    ${state.instagram ? `<a href="${escapeHtml(state.instagram)}" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 hover:text-gold-400 hover:border-gold-500 transition"><i class="fa-brands fa-instagram"></i></a>` : ''}
+                    ${state.youtube ? `<a href="${escapeHtml(state.youtube)}" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 hover:text-gold-400 hover:border-gold-500 transition"><i class="fa-brands fa-youtube"></i></a>` : ''}
+                </div>
+            </div>
+
+            <!-- FORMSPREE CONTRACT FORM -->
+            <div class="md:col-span-7 bg-[#141218] p-6 rounded-2xl border border-white/10">
+                <form action="${escapeHtml(state.formspreeUrl)}" method="POST" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Your Name</label>
+                        <input type="text" name="name" required class="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-sm text-white focus:border-gold-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Your Email</label>
+                        <input type="email" name="_replyto" required class="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-sm text-white focus:border-gold-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Message / Performance Details</label>
+                        <textarea name="message" rows="4" required class="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-sm text-white focus:border-gold-500 outline-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-gold-600 to-gold-500 text-black font-bold text-xs uppercase tracking-wider rounded-lg shadow-xl hover:opacity-90 transition">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 border-t border-white/10 text-center text-xs text-gray-500">
+        <p>&copy; ${new Date().getFullYear()} ${escapeHtml(state.name)}. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>`;
+        }
+
+        // Update Live Preview Iframe
+        function updateLivePreview() {
+            const iframe = document.getElementById('live-preview-iframe');
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+            doc.open();
+            doc.write(generatePortfolioHTML());
+            doc.close();
+        }
+
+        function refreshPreview() {
+            updateLivePreview();
+            showToast("Preview reloaded!");
+        }
+
+        // Helper: Download Standalone HTML file
+        function downloadHTMLFile() {
+            const htmlContent = generatePortfolioHTML();
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'index.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast("index.html downloaded!");
+        }
+
+        // Helper: Copy HTML Code to Clipboard
+        function copyGeneratedHTML() {
+            const htmlContent = generatePortfolioHTML();
+            const textarea = document.createElement('textarea');
+            textarea.value = htmlContent;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast("HTML copied to clipboard!");
+        }
+
+        // Toast Notification Display
+        function showToast(msg) {
+            const toast = document.getElementById('toast-message');
+            document.getElementById('toast-text').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
 </body>
 </html>
