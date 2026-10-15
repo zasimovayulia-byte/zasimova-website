@@ -4,232 +4,250 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yuliia Zasimova — Soprano Opera Artist</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gold: {
-                            300: '#f7e4a1',
-                            400: '#eed16d',
-                            500: '#d4af37',
-                            600: '#aa8823',
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #0a090b; color: #e5e7eb; }
-        .gold-text {
-            background: linear-gradient(135deg, #fff2cb 0%, #d4af37 50%, #aa8823 100%);
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+        }
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa771c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-gold-500 selection:text-black">
+<body class="bg-[#0a0a0a] text-gray-200 antialiased selection:bg-amber-500 selection:text-black">
 
-    <!-- HEADER / NAVIGATION -->
-    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4 flex items-center justify-between">
-        <a href="#" class="font-serif text-2xl font-bold tracking-wider gold-text">Yuliia Zasimova</a>
-        <div class="hidden md:flex space-x-8 text-xs font-medium uppercase tracking-widest text-gray-300">
-            <a href="#about" class="hover:text-gold-400 transition">Biography</a>
-            <a href="#audio" class="hover:text-gold-400 transition">Audio & Repertoire</a>
-            <a href="#gallery" class="hover:text-gold-400 transition">Gallery</a>
-            <a href="#contact" class="hover:text-gold-400 transition">Contact</a>
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-amber-500/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="font-serif text-xl md:text-2xl font-bold tracking-wider gold-gradient">
+                Yuliia Zasimova
+            </a>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest font-medium text-gray-300">
+                <a href="#biography" class="hover:text-amber-400 transition-colors" data-lang-en="Biography" data-lang-ua="Біографія">Biography</a>
+                <a href="#repertoire" class="hover:text-amber-400 transition-colors" data-lang-en="Repertoire" data-lang-ua="Репертуар">Repertoire</a>
+                <a href="#media" class="hover:text-amber-400 transition-colors" data-lang-en="Audio" data-lang-ua="Аудіо">Audio</a>
+                <a href="#gallery" class="hover:text-amber-400 transition-colors" data-lang-en="Gallery" data-lang-ua="Галерея">Gallery</a>
+                <a href="#contact" class="hover:text-amber-400 transition-colors" data-lang-en="Contact" data-lang-ua="Контакти">Contact</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <!-- Language Switcher -->
+                <div class="flex items-center bg-[#181818] border border-amber-500/30 rounded-full p-1 text-xs font-semibold">
+                    <button id="btn-en" onclick="setLanguage('en')" class="px-3 py-1 rounded-full bg-amber-500 text-black transition-all">EN</button>
+                    <button id="btn-ua" onclick="setLanguage('ua')" class="px-3 py-1 rounded-full text-gray-400 hover:text-white transition-all">UA</button>
+                </div>
+
+                <a href="#contact" class="hidden md:inline-block px-5 py-2.5 rounded-full border border-amber-500/50 text-amber-400 hover:bg-amber-500 hover:text-black transition-all duration-300 text-xs font-semibold uppercase tracking-widest" data-lang-en="Book Performance" data-lang-ua="Замовити виступ">
+                    Book Performance
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" class="md:hidden text-amber-400 focus:outline-none">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <a href="#contact" class="px-4 py-2 text-xs uppercase tracking-wider font-semibold border border-gold-500/60 text-gold-400 hover:bg-gold-500 hover:text-black rounded-full transition">Book Performance</a>
-    </nav>
 
-    <!-- HERO SECTION -->
-    <section class="min-h-screen pt-24 pb-12 px-6 flex items-center justify-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#0a090b] via-transparent to-black/60 z-10"></div>
-        <div class="max-w-6xl w-full grid md:grid-cols-12 gap-12 items-center relative z-20">
-            <div class="md:col-span-7 space-y-6">
-                <span class="text-xs uppercase tracking-[0.3em] font-semibold text-gold-400 border-l-2 border-gold-500 pl-3 inline-block">Soprano Opera Artist</span>
-                <h1 class="font-serif text-5xl md:text-7xl font-bold text-white leading-tight">Yuliia Zasimova</h1>
-                <p class="text-lg text-gray-300 font-serif italic max-w-xl">Expressive Operatic Performances, Masterful Coloratura &amp; Classical Repertoire</p>
-                <div class="pt-4 flex flex-wrap gap-4">
-                    <a href="#audio" class="px-6 py-3 bg-gradient-to-r from-gold-600 to-gold-500 text-black font-semibold rounded-full text-xs uppercase tracking-wider shadow-xl hover:opacity-90 transition flex items-center">
-                        <i class="fa-solid fa-play mr-2"></i> Listen to Arias
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#121212] border-b border-amber-500/20 px-6 py-6 space-y-4">
+            <a href="#biography" class="block text-gray-300 hover:text-amber-400 uppercase tracking-widest text-sm" data-lang-en="Biography" data-lang-ua="Біографія">Biography</a>
+            <a href="#repertoire" class="block text-gray-300 hover:text-amber-400 uppercase tracking-widest text-sm" data-lang-en="Repertoire" data-lang-ua="Репертуар">Repertoire</a>
+            <a href="#media" class="block text-gray-300 hover:text-amber-400 uppercase tracking-widest text-sm" data-lang-en="Audio" data-lang-ua="Аудіо">Audio</a>
+            <a href="#gallery" class="block text-gray-300 hover:text-amber-400 uppercase tracking-widest text-sm" data-lang-en="Gallery" data-lang-ua="Галерея">Gallery</a>
+            <a href="#contact" class="block text-gray-300 hover:text-amber-400 uppercase tracking-widest text-sm" data-lang-en="Contact" data-lang-ua="Контакти">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen pt-32 pb-20 flex items-center relative overflow-hidden bg-gradient-to-b from-[#121212] to-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold uppercase tracking-widest">
+                    <span>Soprano Opera Artist</span>
+                </div>
+                <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-tight">
+                    Yuliia <span class="gold-gradient">Zasimova</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-400 max-w-2xl font-light leading-relaxed" data-lang-en="Expressive operatic performances, masterful coloratura technique, and profound interpretation of European classical repertoire." data-lang-ua="Експресивні оперні виступи, віртуозна колоратура та глибоке занурення у класичний репертуар світової оперної спадщини.">
+                    Expressive operatic performances, masterful coloratura technique, and profound interpretation of European classical repertoire.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#media" class="w-full sm:w-auto px-8 py-4 rounded-full bg-amber-500 text-black font-semibold hover:bg-amber-400 transition-all duration-300 tracking-wider text-sm uppercase text-center shadow-lg shadow-amber-500/20" data-lang-en="Listen to Arias" data-lang-ua="Слухати партії">
+                        Listen to Arias
                     </a>
-                    <a href="#contact" class="px-6 py-3 border border-gray-700 hover:border-gold-500 text-gray-300 hover:text-white font-semibold rounded-full text-xs uppercase tracking-wider transition">
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 transition-all duration-300 tracking-wider text-sm uppercase text-center" data-lang-en="Contact Management" data-lang-ua="Контактний менеджмент">
                         Contact Management
                     </a>
                 </div>
             </div>
-            <div class="md:col-span-5 relative">
-                <div class="relative w-full aspect-[3/4] rounded-2xl overflow-hidden border border-gold-500/30 shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Yuliia Zasimova" class="w-full h-full object-cover">
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- BIOGRAPHY SECTION -->
-    <section id="about" class="py-20 px-6 bg-[#0f0e12] border-t border-b border-white/5">
-        <div class="max-w-4xl mx-auto space-y-10">
-            <div class="text-center space-y-3">
-                <h2 class="font-serif text-4xl font-bold text-white">Biography</h2>
-                <div class="w-16 h-0.5 bg-gold-500 mx-auto"></div>
-            </div>
-            <div class="text-gray-300 leading-relaxed space-y-4 text-base font-light">
-                <p>Yuliia Zasimova is an acclaimed Ukrainian soprano renowned for her brilliant vocal technique, dramatic depth, and captivating stage presence across leading European opera houses. Her repertoire spans classical bel canto masterpieces, Mozartian roles, and modern dramatic compositions.</p><p>She regularly collaborates with prominent conductors and symphony orchestras, enchanting audiences with effortless vocal agility and refined musical interpretation.</p>
-            </div>
-
-            <!-- Opera Highlights / Roles -->
-            
-            <div class="pt-6 border-t border-gray-800">
-                <h3 class="text-xs uppercase tracking-widest font-semibold text-gold-400 mb-4 text-center">Featured Opera Roles</h3>
-                <div class="flex flex-wrap justify-center gap-2">
-                    <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 font-medium">Violetta (La Traviata)</span><span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 font-medium">Queen of the Night (The Magic Flute)</span><span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 font-medium">Lucia (Lucia di Lammermoor)</span><span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 font-medium">Musetta (La Bohème)</span><span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 font-medium">Susanna (Le Nozze di Figaro)</span>
-                </div>
-            </div>
-            
-        </div>
-    </section>
-
-    <!-- AUDIO & REPERTOIRE SECTION -->
-    <section id="audio" class="py-20 px-6 max-w-5xl mx-auto space-y-12">
-        <div class="text-center space-y-3">
-            <span class="text-xs uppercase tracking-[0.2em] font-semibold text-gold-400">Listen</span>
-            <h2 class="font-serif text-4xl font-bold text-white">Audio Recordings & Arias</h2>
-            <div class="w-16 h-0.5 bg-gold-500 mx-auto"></div>
-        </div>
-
-        <div class="space-y-4">
-            
-            <div class="bg-[#141218] border border-white/10 p-5 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-gold-500/40 transition">
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 shrink-0">
-                        <i class="fa-solid fa-music"></i>
+            <!-- Primary Photo Section -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-md">
+                    <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-amber-600 to-amber-300 opacity-30 blur-lg"></div>
+                    <div class="relative overflow-hidden rounded-2xl border border-amber-500/30 shadow-2xl bg-[#181818]">
+                        <img id="main-portrait" src="yulia.jpg" alt="Yuliia Zasimova - Soprano" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700">
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biography Section -->
+    <section id="biography" class="py-24 border-t border-amber-500/10 bg-[#0d0d0d]">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-amber-400 text-xs font-semibold uppercase tracking-widest" data-lang-en="About the Artist" data-lang-ua="Про артистку">About the Artist</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white" data-lang-en="Biography" data-lang-ua="Біографія та Шлях">Biography</h2>
+                <div class="w-16 h-0.5 bg-amber-500 mx-auto"></div>
+            </div>
+
+            <div class="space-y-6 text-gray-300 text-lg font-light leading-relaxed">
+                <p data-lang-en="Yuliia Zasimova is an acclaimed Ukrainian soprano renowned for her brilliant vocal technique, dramatic depth, and captivating stage presence across leading European opera houses." data-lang-ua="Юлія Засімова — українська оперна співачка (сопрано), чий голос поєднує кристальну чистоту колоратури, драматичну глибину та витончену музичну інтерпретацію.">
+                    Yuliia Zasimova is an acclaimed Ukrainian soprano renowned for her brilliant vocal technique, dramatic depth, and captivating stage presence across leading European opera houses.
+                </p>
+                <p data-lang-en="Her repertoire spans classical bel canto masterpieces, Mozartean roles, and modern dramatic compositions. She regularly collaborates with prominent conductors and symphony orchestras." data-lang-ua="Репертуар співачки охоплює найвидатніші партії європейської класики — від Моцартовських героїнь до драматичних образів Верді та Доніцетті. Вона активно співпрацює з провідними диригентами та оркестрами.">
+                    Her repertoire spans classical bel canto masterpieces, Mozartean roles, and modern dramatic compositions. She regularly collaborates with prominent conductors and symphony orchestras.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Repertoire Section -->
+    <section id="repertoire" class="py-24 border-t border-amber-500/10 bg-[#0a0a0a]">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-amber-400 text-xs font-semibold uppercase tracking-widest" data-lang-en="Repertoire" data-lang-ua="Репертуар">Repertoire</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white" data-lang-en="Key Operatic Roles" data-lang-ua="Ключові Оперні Партії">Key Operatic Roles</h2>
+                <div class="w-16 h-0.5 bg-amber-500 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-8 rounded-2xl bg-[#121212] border border-amber-500/20">
+                    <span class="text-amber-400 text-xs font-semibold uppercase tracking-widest">Giuseppe Verdi</span>
+                    <h3 class="font-serif text-2xl font-bold text-white mt-2 mb-3">Violetta Valéry</h3>
+                    <p class="text-gray-400 text-sm" data-lang-en="La Traviata. Virtuosic role requiring flawless cantilena and profound dramatic intensity." data-lang-ua="Опера «La Traviata». Віртуозна партія, що вимагає бездоганної кантилени та драматичного розкриття.">La Traviata. Virtuosic role requiring flawless cantilena and profound dramatic intensity.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-[#121212] border border-amber-500/20">
+                    <span class="text-amber-400 text-xs font-semibold uppercase tracking-widest">W. A. Mozart</span>
+                    <h3 class="font-serif text-2xl font-bold text-white mt-2 mb-3">Queen of the Night</h3>
+                    <p class="text-gray-400 text-sm" data-lang-en="Die Zauberflöte. Legendary coloratura role featuring iconic high-F vocal fireworks." data-lang-ua="Опера «Die Zauberflöte». Легендарна колоратурна партія з вражаючими верхніми нотами.">Die Zauberflöte. Legendary coloratura role featuring iconic high-F vocal fireworks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audio Section -->
+    <section id="media" class="py-24 border-t border-amber-500/10 bg-[#0d0d0d]">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-amber-400 text-xs font-semibold uppercase tracking-widest" data-lang-en="Audio Showcase" data-lang-ua="Аудіозаписи">Audio Showcase</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white" data-lang-en="Listen to Recordings" data-lang-ua="Слухати Записи">Listen to Recordings</h2>
+                <div class="w-16 h-0.5 bg-amber-500 mx-auto"></div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="p-6 rounded-2xl bg-[#151515] border border-amber-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div>
-                        <h4 class="font-serif text-lg font-bold text-white">Der Hölle Rache (The Magic Flute)</h4>
-                        <p class="text-xs text-gray-400">W. A. Mozart — <span class="text-gold-400">Queen of the Night</span></p>
+                        <span class="text-amber-400 text-xs uppercase tracking-widest">Verdi</span>
+                        <h4 class="font-serif text-lg font-bold text-white">«Ah, fors' è lui» — La Traviata</h4>
                     </div>
-                </div>
-                <div class="w-full md:w-72">
-                    <audio controls class="w-full h-9 rounded-lg">
-                        <source src="https://actions.google.com/sounds/v1/ambiences/orchestra_tuning.ogg" type="audio/mpeg">
+                    <audio controls class="w-full sm:w-80 h-10 accent-amber-500">
+                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
                     </audio>
                 </div>
             </div>
-            
-            <div class="bg-[#141218] border border-white/10 p-5 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-gold-500/40 transition">
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 shrink-0">
-                        <i class="fa-solid fa-music"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-serif text-lg font-bold text-white">Sempre Libera (La Traviata)</h4>
-                        <p class="text-xs text-gray-400">Giuseppe Verdi — <span class="text-gold-400">Violetta Valéry</span></p>
-                    </div>
-                </div>
-                <div class="w-full md:w-72">
-                    <audio controls class="w-full h-9 rounded-lg">
-                        <source src="https://actions.google.com/sounds/v1/ambiences/audience_applause.ogg" type="audio/mpeg">
-                    </audio>
-                </div>
-            </div>
-            
         </div>
     </section>
 
-    <!-- GALLERY SECTION -->
-    <section id="gallery" class="py-20 px-6 bg-[#0f0e12] border-t border-white/5">
-        <div class="max-w-6xl mx-auto space-y-12">
-            <div class="text-center space-y-3">
-                <h2 class="font-serif text-4xl font-bold text-white">Photo Gallery</h2>
-                <div class="w-16 h-0.5 bg-gold-500 mx-auto"></div>
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 border-t border-amber-500/10 bg-[#0d0d0d]">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-amber-400 text-xs font-semibold uppercase tracking-widest" data-lang-en="Contact" data-lang-ua="Зв'язок">Contact</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white" data-lang-en="Get in Touch" data-lang-ua="Контакти та Замовлення">Get in Touch</h2>
+                <div class="w-16 h-0.5 bg-amber-500 mx-auto"></div>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-6">
-                
-                <div class="group relative aspect-[4/3] rounded-xl overflow-hidden border border-white/10 bg-black">
-                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Operatic Recital Performance" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition p-4 flex items-end">
-                        <p class="text-xs text-gold-300 font-medium">Operatic Recital Performance</p>
-                    </div>
-                </div>
-                
-                <div class="group relative aspect-[4/3] rounded-xl overflow-hidden border border-white/10 bg-black">
-                    <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Symphony Orchestra Concert" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition p-4 flex items-end">
-                        <p class="text-xs text-gold-300 font-medium">Symphony Orchestra Concert</p>
-                    </div>
-                </div>
-                
-                <div class="group relative aspect-[4/3] rounded-xl overflow-hidden border border-white/10 bg-black">
-                    <img src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Stage Rehearsal Portrait" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition p-4 flex items-end">
-                        <p class="text-xs text-gold-300 font-medium">Stage Rehearsal Portrait</p>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT & FORMSPREE SECTION -->
-    <section id="contact" class="py-20 px-6 max-w-4xl mx-auto space-y-12">
-        <div class="text-center space-y-3">
-            <span class="text-xs uppercase tracking-[0.2em] font-semibold text-gold-400">Get in Touch</span>
-            <h2 class="font-serif text-4xl font-bold text-white">Contact & Bookings</h2>
-            <div class="w-16 h-0.5 bg-gold-500 mx-auto"></div>
-        </div>
-
-        <div class="grid md:grid-cols-12 gap-8">
-            <div class="md:col-span-5 bg-[#141218] p-6 rounded-2xl border border-white/10 space-y-6">
+            <form action="https://formspree.io/f/zasimova.yulia@gmail.com" method="POST" class="space-y-6 bg-[#121212] p-8 sm:p-10 rounded-2xl border border-amber-500/20">
                 <div>
-                    <h4 class="text-xs uppercase tracking-wider font-semibold text-gold-400 mb-1">Direct Contact</h4>
-                    <p class="text-sm font-medium text-white">zasimova.yulia@gmail.com</p>
+                    <label class="block text-xs uppercase tracking-widest text-amber-400 mb-2" data-lang-en="Your Name" data-lang-ua="Ваше ім'я">Your Name</label>
+                    <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-gray-800 text-white focus:border-amber-500 focus:outline-none">
                 </div>
                 <div>
-                    <h4 class="text-xs uppercase tracking-wider font-semibold text-gold-400 mb-1">Location</h4>
-                    <p class="text-sm text-gray-300">Kyiv / Vienna / Worldwide Opera Stage</p>
+                    <label class="block text-xs uppercase tracking-widest text-amber-400 mb-2" data-lang-en="Your Email" data-lang-ua="Ваш Email">Your Email</label>
+                    <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-gray-800 text-white focus:border-amber-500 focus:outline-none">
                 </div>
-                <div class="pt-4 border-t border-gray-800 flex space-x-4">
-                    <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 hover:text-gold-400 hover:border-gold-500 transition"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://youtube.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 hover:text-gold-400 hover:border-gold-500 transition"><i class="fa-brands fa-youtube"></i></a>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-amber-400 mb-2" data-lang-en="Message" data-lang-ua="Повідомлення">Message</label>
+                    <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-gray-800 text-white focus:border-amber-500 focus:outline-none"></textarea>
                 </div>
-            </div>
-
-            <!-- FORMSPREE CONTRACT FORM -->
-            <div class="md:col-span-7 bg-[#141218] p-6 rounded-2xl border border-white/10">
-                <form action="https://formspree.io/f/zasimova.yulia@gmail.com" method="POST" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-medium text-gray-400 mb-1">Your Name</label>
-                        <input type="text" name="name" required class="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-sm text-white focus:border-gold-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-gray-400 mb-1">Your Email</label>
-                        <input type="email" name="_replyto" required class="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-sm text-white focus:border-gold-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-gray-400 mb-1">Message / Performance Details</label>
-                        <textarea name="message" rows="4" required class="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-sm text-white focus:border-gold-500 outline-none"></textarea>
-                    </div>
-                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-gold-600 to-gold-500 text-black font-bold text-xs uppercase tracking-wider rounded-lg shadow-xl hover:opacity-90 transition">
-                        Send Message
-                    </button>
-                </form>
-            </div>
+                <button type="submit" class="w-full py-4 rounded-xl bg-amber-500 text-black font-semibold hover:bg-amber-400 transition-colors uppercase tracking-widest text-sm" data-lang-en="Send Message" data-lang-ua="Надіслати повідомлення">
+                    Send Message
+                </button>
+            </form>
         </div>
     </section>
 
-    <footer class="py-8 border-t border-white/10 text-center text-xs text-gray-500">
-        <p>&copy; 2026 Yuliia Zasimova. All rights reserved.</p>
+    <footer class="py-12 border-t border-amber-500/10 bg-[#0a0a0a] text-center text-gray-500 text-sm">
+        <p class="font-serif text-amber-400/80 text-lg">Yuliia Zasimova</p>
+        <p>&copy; 2026 All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript for Languages & Image Fallback -->
+    <script>
+        // Language switcher function
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('[data-lang-en]');
+            elements.forEach(el => {
+                if (lang === 'ua') {
+                    el.textContent = el.getAttribute('data-lang-ua');
+                } else {
+                    el.textContent = el.getAttribute('data-lang-en');
+                }
+            });
+
+            // Toggle active state on buttons
+            const btnEn = document.getElementById('btn-en');
+            const btnUa = document.getElementById('btn-ua');
+            if (lang === 'ua') {
+                btnUa.className = 'px-3 py-1 rounded-full bg-amber-500 text-black transition-all';
+                btnEn.className = 'px-3 py-1 rounded-full text-gray-400 hover:text-white transition-all';
+            } else {
+                btnEn.className = 'px-3 py-1 rounded-full bg-amber-500 text-black transition-all';
+                btnUa.className = 'px-3 py-1 rounded-full text-gray-400 hover:text-white transition-all';
+            }
+        }
+
+        // Image fallback handler to ensure image displays
+        const img = document.getElementById('main-portrait');
+        img.onerror = function() {
+            // Backup image link if yulia.jpg is missing
+            this.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1000';
+        };
+
+        // Mobile Menu toggle
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (btn && menu) {
+            btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        }
+    </script>
 </body>
 </html>
